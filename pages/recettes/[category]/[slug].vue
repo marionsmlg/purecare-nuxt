@@ -75,7 +75,6 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     recipeBeautyIssues.value = displayBeautyIssues(dataRecipe.beautyIssue);
     recipePhysicalTrait.value = displayPhysicalTraits(dataRecipe.physicalTrait);
     isDataLoaded.value = true;
-    configureSeo();
   } catch (error) {
     console.error(error);
   }
@@ -83,7 +82,7 @@ async function fetchDataRecipeBySlug(recipeSlug) {
 
 fetchDataRecipeBySlug(recipeSlug);
 
-function configureSeo() {
+if (isDataLoaded.value) {
   useSeoMeta({
     title: () => recipe.value?.title,
     description: () => `Découvrez notre recette de ${recipe.value?.title}`,
