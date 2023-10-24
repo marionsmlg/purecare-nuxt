@@ -84,55 +84,55 @@ async function fetchDataRecipeBySlug(recipeSlug) {
 
 fetchDataRecipeBySlug(recipeSlug);
 
-useHead({
-  title: recipeTitle,
-  meta: [
-    {
-      name: "description",
-      content: `Découvrez notre recette de ${recipeTitle.value}`,
-    },
-    {
-      property: "og:title",
-      content: recipeTitle,
-    },
-    {
-      property: "og:description",
-      content: `Découvrez notre recette de ${recipeTitle.value}`,
-    },
-    {
-      property: "og:image",
-      content: recipeImg,
-    },
-    {
-      property: "twitter:card",
-      content: "summary_large_image",
-    },
-    {
-      property: "twitter:title",
-      content: recipeTitle,
-    },
-    {
-      property: "twitter:description",
-      content: `Découvrez notre recette de ${recipeTitle.value}`,
-    },
-    {
-      property: "twitter:image",
-      content: recipeImg,
-    },
-  ],
-});
-
-// useSeoMeta({
+// useHead({
 //   title: recipeTitle,
-//   description: () => `Découvrez notre recette de ${recipeTitle.value}`,
-//   ogTitle: recipeTitle,
-//   ogDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
-//   ogImage: recipeImg,
-//   twitterCard: "summary_large_image",
-//   twitterTitle: recipeTitle,
-//   twitterDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
-//   twitterImage: recipeImg,
+//   meta: [
+//     {
+//       name: "description",
+//       content: `Découvrez notre recette de ${recipeTitle.value}`,
+//     },
+//     {
+//       property: "og:title",
+//       content: recipeTitle,
+//     },
+//     {
+//       property: "og:description",
+//       content: `Découvrez notre recette de ${recipeTitle.value}`,
+//     },
+//     {
+//       property: "og:image",
+//       content: recipeImg,
+//     },
+//     {
+//       property: "twitter:card",
+//       content: "summary_large_image",
+//     },
+//     {
+//       property: "twitter:title",
+//       content: recipeTitle,
+//     },
+//     {
+//       property: "twitter:description",
+//       content: `Découvrez notre recette de ${recipeTitle.value}`,
+//     },
+//     {
+//       property: "twitter:image",
+//       content: recipeImg,
+//     },
+//   ],
 // });
+
+useSeoMeta({
+  title: recipeTitle,
+  description: () => `Découvrez notre recette de ${recipeTitle.value}`,
+  ogTitle: recipeTitle,
+  ogDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
+  ogImage: recipeImg,
+  twitterCard: "summary_large_image",
+  twitterTitle: recipeTitle,
+  twitterDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
+  twitterImage: recipeImg,
+});
 </script>
 
 <template>
