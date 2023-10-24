@@ -59,7 +59,6 @@ const recipeBenefits = ref([]);
 const recipeAllergens = ref([]);
 const recipeBeautyIssues = ref([]);
 const recipePhysicalTrait = ref([]);
-const isDataLoaded = ref(false);
 
 async function fetchDataRecipeBySlug(recipeSlug) {
   try {
@@ -74,7 +73,6 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     recipeAllergens.value = displayAllergens(dataRecipe.allergen);
     recipeBeautyIssues.value = displayBeautyIssues(dataRecipe.beautyIssue);
     recipePhysicalTrait.value = displayPhysicalTraits(dataRecipe.physicalTrait);
-    isDataLoaded.value = true;
   } catch (error) {
     console.error(error);
   }
@@ -85,6 +83,7 @@ fetchDataRecipeBySlug(recipeSlug);
 useSeoMeta({
   title: () => recipe.value.title,
   description: () => `Découvrez notre recette de ${recipe.value.title}`,
+  ogType: "website",
   ogTitle: () => recipe.value.title,
   ogDescription: () => `Découvrez notre recette de ${recipe.value.title}`,
   ogImage: () => recipe.value.img_url,
