@@ -85,15 +85,15 @@ async function fetchDataRecipeBySlug(recipeSlug) {
 fetchDataRecipeBySlug(recipeSlug);
 
 useSeoMeta({
-  title: () => recipeTitle,
-  description: () => `Découvrez notre recette de ${recipeTitle.value}`,
-  ogTitle: () => recipeTitle,
-  ogDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
-  ogImage: () => recipeImg,
+  title: () => recipe.value?.title,
+  description: () => `Découvrez notre recette de ${recipe.value?.title}`,
+  ogTitle: () => recipe.value?.title,
+  ogDescription: () => `Découvrez notre recette de ${recipe.value?.title}`,
+  ogImage: () => recipe.value?.img_url,
   twitterCard: "summary_large_image",
-  twitterTitle: () => recipeTitle,
-  twitterDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
-  twitterImage: () => recipeImg,
+  twitterTitle: () => recipe.value?.title,
+  twitterDescription: () => `Découvrez notre recette de ${recipe.value?.title}`,
+  twitterImage: () => recipe.value?.img_url,
 });
 </script>
 
