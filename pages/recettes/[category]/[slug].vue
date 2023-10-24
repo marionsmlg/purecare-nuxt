@@ -86,18 +86,6 @@ fetchDataRecipeBySlug(recipeSlug);
 
 useSeoMeta({
   title: recipeTitle,
-  ogTitle: () => `description: ${title.value}`,
-  description: `Découvrez notre recette de ${recipeTitle.value}`,
-  ogDescription: `Découvrez notre recette de ${recipeTitle.value}`,
-  ogImage: recipeImg.value,
-  twitterCard: "summary_large_image",
-  twitterTitle: recipeTitle.value,
-  twitterDescription: `Découvrez notre recette de ${recipeTitle.value}`,
-  twitterImage: recipeImg.value,
-});
-
-useSeoMeta({
-  title: recipeTitle,
   description: () => `Découvrez notre recette de ${recipeTitle.value}`,
   ogTitle: recipeTitle,
   ogDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
