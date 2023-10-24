@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import {
   BeakerIcon,
   ChevronUpIcon,
@@ -82,20 +82,22 @@ async function fetchDataRecipeBySlug(recipeSlug) {
 
 fetchDataRecipeBySlug(recipeSlug);
 
-if (isDataLoaded.value) {
-  useSeoMeta({
-    title: () => recipe.value?.title,
-    description: () => `Découvrez notre recette de ${recipe.value?.title}`,
-    ogTitle: () => recipe.value?.title,
-    ogDescription: () => `Découvrez notre recette de ${recipe.value?.title}`,
-    ogImage: () => recipe.value?.img_url,
-    twitterCard: "summary_large_image",
-    twitterTitle: () => recipe.value?.title,
-    twitterDescription: () =>
-      `Découvrez notre recette de ${recipe.value?.title}`,
-    twitterImage: () => recipe.value?.img_url,
-  });
-}
+watchEffect(() => {
+  if (isDataLoaded.value && recipe.value) {
+    useSeoMeta({
+      title: () => recipe.value.title,
+      description: () => `Découvrez notre recette de ${recipe.value.title}`,
+      ogTitle: () => recipe.value.title,
+      ogDescription: () => `Découvrez notre recette de ${recipe.value.title}`,
+      ogImage: () => recipe.value.img_url,
+      twitterCard: "summary_large_image",
+      twitterTitle: () => recipe.value.title,
+      twitterDescription: () =>
+        `Découvrez notre recette de ${recipe.value.title}`,
+      twitterImage: () => recipe.value.img_url,
+    });
+  }
+});
 </script>
 
 <template>
