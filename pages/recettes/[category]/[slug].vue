@@ -77,24 +77,24 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     recipeAllergens.value = displayAllergens(dataRecipe.allergen);
     recipeBeautyIssues.value = displayBeautyIssues(dataRecipe.beautyIssue);
     recipePhysicalTrait.value = displayPhysicalTraits(dataRecipe.physicalTrait);
-    useSeoMeta({
-      title: recipeTitle,
-      description: () => `Découvrez notre recette de ${recipeTitle.value}`,
-      ogTitle: recipeTitle,
-      ogDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
-      ogImage: recipeImg,
-      twitterCard: "summary_large_image",
-      twitterTitle: recipeTitle,
-      twitterDescription: () =>
-        `Découvrez notre recette de ${recipeTitle.value}`,
-      twitterImage: recipeImg,
-    });
   } catch (error) {
     console.error(error);
   }
 }
 
 fetchDataRecipeBySlug(recipeSlug);
+
+useSeoMeta({
+  title: () => recipeTitle,
+  description: () => `Découvrez notre recette de ${recipeTitle.value}`,
+  ogTitle: () => recipeTitle,
+  ogDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
+  ogImage: () => recipeImg,
+  twitterCard: "summary_large_image",
+  twitterTitle: () => recipeTitle,
+  twitterDescription: () => `Découvrez notre recette de ${recipeTitle.value}`,
+  twitterImage: () => recipeImg,
+});
 </script>
 
 <template>
