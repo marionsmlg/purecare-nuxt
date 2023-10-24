@@ -1,12 +1,11 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { ChevronLeftIcon } from '@heroicons/vue/20/solid'
-import { RouterLink, useRouter } from 'vue-router'
+import { ref, computed } from "vue";
+import { ChevronLeftIcon } from "@heroicons/vue/20/solid";
 
-const router = useRouter()
+const router = useRouter();
 
 function goBack() {
-  router.go(-1)
+  router.go(-1);
 }
 </script>
 

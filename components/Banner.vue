@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 
-import { RouterLink, useRouter } from "vue-router";
 let showBanner = ref(true);
 
 // function hideBanner() {

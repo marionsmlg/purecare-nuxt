@@ -1,140 +1,150 @@
 <script setup>
-import { ChevronLeftIcon } from '@heroicons/vue/20/solid'
-import SkinTypes from '../components/beauty-profile/SkinTypes.vue'
-import SkinHairProblems from '../components/beauty-profile/SkinHairProblems.vue'
-import HairTypes from '../components/beauty-profile/HairTypes.vue'
-import BackButton from '../components/buttons/BackButton.vue'
-import { ref, computed } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
-import { apiUrl, uuidIsValid, uidFirebaseValid, postData } from '@/utils.js'
-import { firebaseApp } from '@/firebaseconfig.js'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { ChevronLeftIcon } from "@heroicons/vue/20/solid";
+import SkinTypes from "../components/beauty-profile/SkinTypes.vue";
+import SkinHairProblems from "../components/beauty-profile/SkinHairProblems.vue";
+import HairTypes from "../components/beauty-profile/HairTypes.vue";
+import BackButton from "../components/buttons/BackButton.vue";
+import { ref, computed } from "vue";
+import { apiUrl, uuidIsValid, uidFirebaseValid, postData } from "@/utils.js";
+import { firebaseApp } from "@/firebaseconfig.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const auth = getAuth(firebaseApp)
+const auth = getAuth(firebaseApp);
 
-const skinProblems = ref([])
-const hairProblems = ref([])
+const skinProblems = ref([]);
+const hairProblems = ref([]);
 
 async function fetchBeautyIssues() {
   try {
-    const queryString = `/api/v1/beauty-issue`
-    const url = apiUrl + queryString
-    const response = await fetch(url)
-    const data = await response.json()
-    skinProblems.value = data.skinIssue
-    hairProblems.value = data.hairIssue
+    const queryString = `/api/v1/beauty-issue`;
+    const url = apiUrl + queryString;
+    const response = await fetch(url);
+    const data = await response.json();
+    skinProblems.value = data.skinIssue;
+    hairProblems.value = data.hairIssue;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
-fetchBeautyIssues()
+fetchBeautyIssues();
 
 const quizData = [
-  { text: 'Quel est votre type de peau ?', component: SkinTypes, instance: 'skinType' },
   {
-    text: 'Avez-vous des problèmes de peau spécifiques ?',
-    component: SkinHairProblems,
-    instance: 'skinProblems'
+    text: "Quel est votre type de peau ?",
+    component: SkinTypes,
+    instance: "skinType",
   },
   {
-    text: 'Quelle est votre texture de cheveux naturelle ?',
+    text: "Avez-vous des problèmes de peau spécifiques ?",
+    component: SkinHairProblems,
+    instance: "skinProblems",
+  },
+  {
+    text: "Quelle est votre texture de cheveux naturelle ?",
     component: HairTypes,
-    instance: 'hairType'
+    instance: "hairType",
   },
   {
-    text: 'Avez-vous des problèmes capillaires spécifiques ?',
+    text: "Avez-vous des problèmes capillaires spécifiques ?",
     component: SkinHairProblems,
-    instance: 'hairProblems'
-  }
-]
+    instance: "hairProblems",
+  },
+];
 
 //////////////////////////////////
 
-const selectedOption = ref({})
-const selectedSkinProblem = ref([])
-const selectedHairProblem = ref([])
+const selectedOption = ref({});
+const selectedSkinProblem = ref([]);
+const selectedHairProblem = ref([]);
 
 const allQuestionsAnswered = computed(() => {
   return (
-    selectedOption.value['skinType'] &&
-    selectedOption.value['hairType'] &&
+    selectedOption.value["skinType"] &&
+    selectedOption.value["hairType"] &&
     selectedSkinProblem.value.length !== 0 &&
     selectedHairProblem.value.length !== 0
-  )
-})
+  );
+});
 
 function updateCheckboxes({ instance, values }) {
-  if (instance === 'skinProblems') {
-    selectedSkinProblem.value = values
-  } else if (instance === 'hairProblems') {
-    selectedHairProblem.value = values
+  if (instance === "skinProblems") {
+    selectedSkinProblem.value = values;
+  } else if (instance === "hairProblems") {
+    selectedHairProblem.value = values;
   }
 }
 
-const router = useRouter()
+const router = useRouter();
 
 function quizDataAreUuids() {
   const arePhysicalTraitsIdsValid =
-    uuidIsValid(selectedOption.value['skinType']) && uuidIsValid(selectedOption.value['hairType'])
+    uuidIsValid(selectedOption.value["skinType"]) &&
+    uuidIsValid(selectedOption.value["hairType"]);
 
   for (const hairTypeId of selectedHairProblem.value) {
-    const isHairTypeIdValid = uuidIsValid(hairTypeId)
+    const isHairTypeIdValid = uuidIsValid(hairTypeId);
 
     if (!isHairTypeIdValid) {
-      return false
+      return false;
     }
   }
   for (const skinTypeId of selectedSkinProblem.value) {
-    const isSkinTypeIdValid = uuidIsValid(skinTypeId)
+    const isSkinTypeIdValid = uuidIsValid(skinTypeId);
 
     if (!isSkinTypeIdValid) {
-      return false
+      return false;
     }
   }
-  return arePhysicalTraitsIdsValid
+  return arePhysicalTraitsIdsValid;
 }
 
 async function quizDataExists() {
   const queryParams = new URLSearchParams({
-    skin_type_id: selectedOption.value['skinType'],
-    hair_type_id: selectedOption.value['hairType'],
-    skin_issue_id: selectedSkinProblem.value.join(','),
-    hair_issue_id: selectedHairProblem.value.join(',')
-  })
+    skin_type_id: selectedOption.value["skinType"],
+    hair_type_id: selectedOption.value["hairType"],
+    skin_issue_id: selectedSkinProblem.value.join(","),
+    hair_issue_id: selectedHairProblem.value.join(","),
+  });
   try {
-    const queryString = `/api/v1/quiz-data-exists?${queryParams}`
-    const url = apiUrl + queryString
-    const response = await fetch(url)
-    const data = await response.json()
-    return data
+    const queryString = `/api/v1/quiz-data-exists?${queryParams}`;
+    const url = apiUrl + queryString;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error('les donnees n existent pas')
+    console.error("les donnees n existent pas");
   }
 }
 
 async function findRecipes() {
-  const quizDataAreValid = await quizDataExists()
+  const quizDataAreValid = await quizDataExists();
   onAuthStateChanged(auth, async (user) => {
     if (user && quizDataAreValid && quizDataAreUuids()) {
       postData(`${apiUrl}/api/v1/users`, {
-        skin_type_id: selectedOption.value['skinType'],
-        hair_type_id: selectedOption.value['hairType'],
-        skin_issue_id: selectedSkinProblem.value.join(','),
-        hair_issue_id: selectedHairProblem.value.join(',')
-      }).then(() => router.push('/mes-recettes'))
+        skin_type_id: selectedOption.value["skinType"],
+        hair_type_id: selectedOption.value["hairType"],
+        skin_issue_id: selectedSkinProblem.value.join(","),
+        hair_issue_id: selectedHairProblem.value.join(","),
+      }).then(() => router.push("/mes-recettes"));
     } else {
       if (quizDataAreValid && quizDataAreUuids() && allQuestionsAnswered) {
-        localStorage.setItem('skinType', selectedOption.value['skinType'])
-        localStorage.setItem('hairType', selectedOption.value['hairType'])
-        localStorage.setItem('skinProblem', JSON.stringify(selectedSkinProblem.value))
-        localStorage.setItem('hairProblem', JSON.stringify(selectedHairProblem.value))
-        router.push('/mes-recettes')
+        localStorage.setItem("skinType", selectedOption.value["skinType"]);
+        localStorage.setItem("hairType", selectedOption.value["hairType"]);
+        localStorage.setItem(
+          "skinProblem",
+          JSON.stringify(selectedSkinProblem.value)
+        );
+        localStorage.setItem(
+          "hairProblem",
+          JSON.stringify(selectedHairProblem.value)
+        );
+        router.push("/mes-recettes");
       } else {
-        console.error('Les donnees ne sont pas valides!!!')
+        console.error("Les donnees ne sont pas valides!!!");
       }
     }
-  })
+  });
 }
 </script>
 
@@ -145,7 +155,10 @@ async function findRecipes() {
       <div class="flex flex-col items-center">
         <h1 class="text-xl font-bold text-center mb-8">{{ question.text }}</h1>
         <component
-          v-if="question.instance === 'skinProblems' || question.instance === 'hairProblems'"
+          v-if="
+            question.instance === 'skinProblems' ||
+            question.instance === 'hairProblems'
+          "
           :problems="
             question.instance === 'skinProblems'
               ? skinProblems
@@ -174,7 +187,7 @@ async function findRecipes() {
           !allQuestionsAnswered
             ? 'bg-sky-200 text-gray-500 cursor-not-allowed'
             : 'bg-[#8CD4E0] hover:bg-[#6ECDDF]',
-          'rounded-xl px-24 py-3 md:text-base text-sm font-bold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          'rounded-xl px-24 py-3 md:text-base text-sm font-bold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
         ]"
         @click="findRecipes"
       >

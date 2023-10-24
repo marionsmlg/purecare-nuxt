@@ -10,7 +10,6 @@ import {
 } from "@heroicons/vue/20/solid";
 import ButtonPrimary from "../components/buttons/ButtonPrimary.vue";
 import ListBox from "../components/buttons/ListBox.vue";
-import { RouterLink, useRouter } from "vue-router";
 import IconPeople from "../components/icons/IconPeople.vue";
 import IconMolecule from "../components/icons/IconMolecule.vue";
 import { firebaseApp } from "@/firebaseconfig.js";

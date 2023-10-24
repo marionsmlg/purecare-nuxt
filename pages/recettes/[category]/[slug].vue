@@ -1,6 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { ref } from "vue";
 import {
   BeakerIcon,
   ChevronUpIcon,
@@ -13,14 +12,12 @@ import BackButton from "../components/buttons/BackButton.vue";
 import IconConservation from "../components/icons/Recipe/IconConservation.vue";
 import IconTexture from "../components/icons/Recipe/IconTexture.vue";
 import IconClock from "../components/icons/Recipe/IconClock.vue";
-import { capitalizeFirstLetter, apiUrl } from "@/utils.js";
+import { apiUrl } from "@/utils.js";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
-const router = useRouter();
 const route = useRoute();
 const recipeSlug = route.params.slug;
-const catgeoryName = route.params.category;
 
 function displayAllergens(fetchedAllergens) {
   if (fetchedAllergens.length === 0) {
@@ -54,6 +51,8 @@ function displayBeautyIssues(arrOfBeautyIssues) {
   }
   return arrOfBeautyIssuesWithoutObject;
 }
+const recipeTitle = ref("");
+const recipeImg = ref("");
 
 const recipe = ref({});
 const recipeIngredients = ref();
@@ -70,6 +69,8 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     const response = await fetch(url);
     const dataRecipe = await response.json();
     recipe.value = dataRecipe.recipe[0];
+    recipeTitle.value = dataRecipe.recipe[0].title;
+    recipeImg.value = dataRecipe.recipe[0].img_url;
     recipeIngredients.value = dataRecipe.ingredient;
     recipeSteps.value = dataRecipe.step;
     recipeBenefits.value = dataRecipe.benefit;
@@ -82,6 +83,15 @@ async function fetchDataRecipeBySlug(recipeSlug) {
 }
 
 fetchDataRecipeBySlug(recipeSlug);
+
+useSeoMeta({
+  title: recipeTitle,
+  ogTitle: "My Amazing Site",
+  description: `Découvrez notre recette de ${recipeTitle}`,
+  ogDescription: `Découvrez notre recette de ${recipeTitle}`,
+  ogImage: recipeImg,
+  twitterCard: "summary_large_image",
+});
 </script>
 
 <template>

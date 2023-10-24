@@ -1,6 +1,4 @@
 <script setup>
-import { ChevronLeftIcon } from "@heroicons/vue/20/solid";
-import { RouterLink, useRouter } from "vue-router";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -17,7 +15,6 @@ const auth = getAuth(firebaseApp);
 
 const userEmail = ref();
 const userPassword = ref();
-const areIdentifiersValid = ref(true);
 
 const router = useRouter();
 

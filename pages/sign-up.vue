@@ -1,6 +1,4 @@
 <script setup>
-import { ChevronLeftIcon } from "@heroicons/vue/20/solid";
-import { RouterLink, useRouter } from "vue-router";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -11,12 +9,7 @@ import {
 } from "firebase/auth";
 import { ref, computed } from "vue";
 import { firebaseApp } from "@/firebaseconfig.js";
-import {
-  apiUrl,
-  uidFirebaseValid,
-  fetchUserBeautyProfile,
-  postData,
-} from "@/utils.js";
+import { apiUrl, fetchUserBeautyProfile, postData } from "@/utils.js";
 
 const auth = getAuth(firebaseApp);
 const router = useRouter();

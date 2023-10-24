@@ -7,12 +7,12 @@ import {
   PencilSquareIcon,
   CogIcon,
 } from "@heroicons/vue/24/outline";
-import { RouterLink, useRouter } from "vue-router";
+
 import PurecareLogo from "@/components/PurecareLogo.vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseApp } from "@/firebaseconfig.js";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 const auth = getAuth(firebaseApp);
 

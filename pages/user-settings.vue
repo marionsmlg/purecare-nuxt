@@ -8,7 +8,6 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { firebaseApp } from "@/firebaseconfig.js";
-import { useRouter } from "vue-router";
 import { apiUrl, deleteData } from "@/utils.js";
 
 const router = useRouter();

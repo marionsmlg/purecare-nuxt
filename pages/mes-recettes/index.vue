@@ -1,7 +1,6 @@
 <script setup>
 import { ClockIcon } from "@heroicons/vue/24/outline";
-import { RouterLink } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import HairIcon from "@/components/icons/RecipeCategories/IconHair.vue";
 import SkinCareIcon from "@/components/icons/RecipeCategories/SkinCare.vue";
 import DamagedHairIcon from "@/components/icons/RecipeCategories/DamagedHair.vue";

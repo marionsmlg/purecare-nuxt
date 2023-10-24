@@ -1,6 +1,5 @@
 <script setup>
 import { ClockIcon } from "@heroicons/vue/24/outline";
-import { RouterLink } from "vue-router";
 
 const props = defineProps({
   recipes: Array,
