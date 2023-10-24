@@ -51,8 +51,6 @@ function displayBeautyIssues(arrOfBeautyIssues) {
   }
   return arrOfBeautyIssuesWithoutObject;
 }
-const recipeTitle = ref("");
-const recipeImg = ref("");
 
 const recipe = ref({});
 const recipeIngredients = ref();
@@ -61,6 +59,7 @@ const recipeBenefits = ref([]);
 const recipeAllergens = ref([]);
 const recipeBeautyIssues = ref([]);
 const recipePhysicalTrait = ref([]);
+const isDataLoaded = ref(false);
 
 async function fetchDataRecipeBySlug(recipeSlug) {
   try {
@@ -69,14 +68,14 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     const response = await fetch(url);
     const dataRecipe = await response.json();
     recipe.value = dataRecipe.recipe[0];
-    recipeTitle.value = dataRecipe.recipe[0].title;
-    recipeImg.value = dataRecipe.recipe[0].img_url;
     recipeIngredients.value = dataRecipe.ingredient;
     recipeSteps.value = dataRecipe.step;
     recipeBenefits.value = dataRecipe.benefit;
     recipeAllergens.value = displayAllergens(dataRecipe.allergen);
     recipeBeautyIssues.value = displayBeautyIssues(dataRecipe.beautyIssue);
     recipePhysicalTrait.value = displayPhysicalTraits(dataRecipe.physicalTrait);
+    isDataLoaded.value = true;
+    configureSeo();
   } catch (error) {
     console.error(error);
   }
@@ -84,17 +83,20 @@ async function fetchDataRecipeBySlug(recipeSlug) {
 
 fetchDataRecipeBySlug(recipeSlug);
 
-useSeoMeta({
-  title: () => recipe.value?.title,
-  description: () => `Découvrez notre recette de ${recipe.value?.title}`,
-  ogTitle: () => recipe.value?.title,
-  ogDescription: () => `Découvrez notre recette de ${recipe.value?.title}`,
-  ogImage: () => recipe.value?.img_url,
-  twitterCard: "summary_large_image",
-  twitterTitle: () => recipe.value?.title,
-  twitterDescription: () => `Découvrez notre recette de ${recipe.value?.title}`,
-  twitterImage: () => recipe.value?.img_url,
-});
+function configureSeo() {
+  useSeoMeta({
+    title: () => recipe.value?.title,
+    description: () => `Découvrez notre recette de ${recipe.value?.title}`,
+    ogTitle: () => recipe.value?.title,
+    ogDescription: () => `Découvrez notre recette de ${recipe.value?.title}`,
+    ogImage: () => recipe.value?.img_url,
+    twitterCard: "summary_large_image",
+    twitterTitle: () => recipe.value?.title,
+    twitterDescription: () =>
+      `Découvrez notre recette de ${recipe.value?.title}`,
+    twitterImage: () => recipe.value?.img_url,
+  });
+}
 </script>
 
 <template>
