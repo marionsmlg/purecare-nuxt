@@ -74,8 +74,8 @@ const loginUser = computed(() => {
 // }
 
 useSeoMeta({
-  title: "PureCare : des soins sains pour une beauté durable",
-  ogTitle: "PureCare : des soins sains pour une beauté durable",
+  title: "Se connecter - PureCare",
+  ogTitle: "Se connecter - PureCare",
   description:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
   ogDescription:
@@ -83,7 +83,7 @@ useSeoMeta({
   ogImage:
     "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
   twitterCard: "summary_large_image",
-  twitterTitle: "PureCare : des soins sains pour une beauté durable",
+  twitterTitle: "Se connecter - PureCare",
   twitterDescription:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
   twitterImage:

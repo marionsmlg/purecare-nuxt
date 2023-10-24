@@ -109,6 +109,22 @@ async function findRecipes() {
     }
   });
 }
+useSeoMeta({
+  title: "Mon profil beauté",
+  ogTitle: "Mon profil beauté",
+  description:
+    "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
+  ogDescription:
+    "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
+  ogImage:
+    "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Mon profil beauté",
+  twitterDescription:
+    "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
+  twitterImage:
+    "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
+});
 </script>
 
 <template>

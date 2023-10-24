@@ -47,6 +47,23 @@ async function verifyEmail() {
   await sendEmailVerification(auth.currentUser);
   console.log("email sent");
 }
+
+useSeoMeta({
+  title: "Paramètres",
+  ogTitle: "PureCare : des soins sains pour une beauté durable",
+  description:
+    "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
+  ogDescription:
+    "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
+  ogImage:
+    "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
+  twitterCard: "summary_large_image",
+  twitterTitle: "PureCare : des soins sains pour une beauté durable",
+  twitterDescription:
+    "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
+  twitterImage:
+    "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
+});
 </script>
 
 <template>

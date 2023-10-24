@@ -42,16 +42,16 @@ async function fetchRecipeProblemId() {
 fetchRecipeProblemId();
 
 useSeoMeta({
-  title: `Recettes soins ${category}`,
+  title: () => `Recettes soins ${category} - ${beautyIssueName.value}`,
   description: () =>
     `Découvrez toutes nos recettes de cosmétiques pour ${beautyIssueName.value}`,
-  ogTitle: `Recettes soins ${category}`,
+  ogTitle: () => `Recettes soins ${category} - ${beautyIssueName.value}`,
   ogDescription: () =>
     `Découvrez toutes nos recettes de cosmétiques pour ${beautyIssueName.value}`,
   ogImage:
     "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
   twitterCard: "summary_large_image",
-  twitterTitle: `Recettes soins ${category}`,
+  twitterTitle: () => `Recettes soins ${category} - ${beautyIssueName.value}`,
   twitterDescription: () =>
     `Découvrez toutes nos recettes de cosmétiques pour ${beautyIssueName.value}`,
   twitterImage:
