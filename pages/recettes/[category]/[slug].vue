@@ -86,11 +86,14 @@ fetchDataRecipeBySlug(recipeSlug);
 
 useSeoMeta({
   title: recipeTitle,
-  ogTitle: "My Amazing Site",
-  description: `Découvrez notre recette de ${recipeTitle}`,
-  ogDescription: `Découvrez notre recette de ${recipeTitle}`,
+  ogTitle: recipeTitle,
+  description: `Découvrez notre recette de ${recipeTitle.value}`,
+  ogDescription: `Découvrez notre recette de ${recipeTitle.value}`,
   ogImage: recipeImg,
   twitterCard: "summary_large_image",
+  twitterTitle: recipeTitle,
+  twitterDescription: `Découvrez notre recette de ${recipeTitle.value}`,
+  twitterImage: recipeImg,
 });
 </script>
 
