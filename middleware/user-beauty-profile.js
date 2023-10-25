@@ -1,9 +1,8 @@
 import { fetchUserBeautyProfile, checkUserAuthentication } from "@/utils.js";
 
-const user = await checkUserAuthentication();
-const hasBeautyProfile = await fetchUserBeautyProfile(user);
-
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const user = await checkUserAuthentication();
+  const hasBeautyProfile = await fetchUserBeautyProfile(user);
   if (!hasBeautyProfile) {
     return navigateTo("/profil-beaute");
   }
