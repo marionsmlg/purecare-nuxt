@@ -86,9 +86,9 @@ useSeoMeta({
   twitterImage: "/purecare-logo.png",
 });
 
-// definePageMeta({
-//   middleware: "not-auth",
-// });
+definePageMeta({
+  middleware: "not-auth",
+});
 </script>
 
 <template>

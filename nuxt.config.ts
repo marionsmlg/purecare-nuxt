@@ -1,5 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
+  runtimeConfig: {
+    public :{ apiKey: process.env.NUXT_API_KEY, 
+      authDomain: `${process.env.NUXT_PROJECT_ID}.firebaseapp.com`,
+      projectId: process.env.NUXT_PROJECT_ID,
+      storageBucket: `${process.env.NUXT_PROJECT_ID}.appspot.com`,
+      messagingSenderId: process.env.NUXT_SENDER_ID,
+      appId: process.env.NUXT_APP_ID,
+      measurementId: process.env.NUXT_MEASUREMENT_ID}
+   
+  
+  },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   postcss: {
@@ -30,14 +42,7 @@ export default defineNuxtConfig({
       ],
     }
   },
-  runtimeConfig: {
-    apiKey: 'AIzaSyAhPjzK9O-DH3FLUGp3SYuzwWfgZ10wyTA', 
-    projectId :'biocare-ac1f1',
-    senderId : '899493293584',
-    appId: '1:899493293584:web:2e7c97ad970719c7196495',
-    measurementId : 'LEHHMR2EE9'
-  
-  },
+ 
 
   
 })

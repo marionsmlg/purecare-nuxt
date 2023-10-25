@@ -7,8 +7,6 @@ import DamagedHairIcon from "@/components/icons/RecipeCategories/DamagedHair.vue
 import recipeIcon from "@/components/icons/Recipe/IconRecipe.vue";
 import {
   addIcon,
-  capitalizeFirstLetter,
-  apiUrl,
   pushObjectValueInNewArr,
   fetchUserBeautyProfile,
   fetchRecipes,

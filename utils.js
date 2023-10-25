@@ -97,6 +97,7 @@ export function uidFirebaseValid(uidFirebase) {
 }
 
 export async function postData(url, data) {
+  const { $auth } = useNuxtApp();
   try {
     console.log(data);
     const user = $auth.currentUser;
@@ -119,6 +120,7 @@ export async function postData(url, data) {
 }
 
 export async function updateData(url, data) {
+  const { $auth } = useNuxtApp();
   try {
     const user = $auth.currentUser;
     if (user) {
@@ -140,6 +142,7 @@ export async function updateData(url, data) {
 }
 
 export async function deleteData(url) {
+  const { $auth } = useNuxtApp();
   const user = $auth.currentUser;
   try {
     if (user) {

@@ -124,8 +124,7 @@ useSeoMeta({
 });
 
 definePageMeta({
-  middleware: "auth",
-  middleware: "user-beauty-profile",
+  middleware: ["user-beauty-profile"],
 });
 </script>
 
