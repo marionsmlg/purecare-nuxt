@@ -61,9 +61,12 @@ if (process.client) {
 }
 
 const beautyProfileCompleted = Boolean(
-  hairTypeId && skinTypeId && strOfSkinProblemId && strOfHairProblemId
+  hairTypeId.value &&
+    skinTypeId.value &&
+    strOfSkinProblemId.value &&
+    strOfHairProblemId.value
 );
-console.log({ strOfSkinProblemId, strOfHairProblemId, hairTypeId, skinTypeId });
+console.log({ beautyProfileCompleted });
 
 const showErrorMessage = ref(false);
 const errorMessage = ref("");
