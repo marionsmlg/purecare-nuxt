@@ -64,6 +64,11 @@ useSeoMeta({
   twitterImage:
     "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
 });
+
+definePageMeta({
+  middleware: "auth",
+  middleware: "user-beauty-profile",
+});
 </script>
 
 <template>
