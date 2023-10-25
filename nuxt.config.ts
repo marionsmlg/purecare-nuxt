@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     measurementId : 'LEHHMR2EE9'
   
   },
+
   
 })
 

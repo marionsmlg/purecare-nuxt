@@ -49,10 +49,17 @@ const userEmail = ref();
 const userPassword = ref();
 const userConfirmPassword = ref();
 
-const hairTypeId = localStorage.getItem("hairType");
-const skinTypeId = localStorage.getItem("skinType");
-const strOfHairProblemId = localStorage.getItem("hairProblem");
-const strOfSkinProblemId = localStorage.getItem("skinProblem");
+const hairTypeId = ref("");
+const skinTypeId = ref("");
+const strOfHairProblemId = ref("");
+const strOfSkinProblemId = ref("");
+
+if (process.client) {
+  hairTypeId.value = localStorage.getItem("hairType");
+  skinTypeId.value = localStorage.getItem("skinType");
+  strOfHairProblemId.value = localStorage.getItem("hairProblem");
+  strOfSkinProblemId.value = localStorage.getItem("skinProblem");
+}
 
 const beautyProfileCompleted = Boolean(
   hairTypeId && skinTypeId && strOfSkinProblemId && strOfHairProblemId
@@ -116,9 +123,10 @@ useSeoMeta({
   twitterImage:
     "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
 });
-definePageMeta({
-  middleware: "not-auth",
-});
+
+// definePageMeta({
+//   middleware: "not-auth",
+// });
 </script>
 
 <template>

@@ -31,7 +31,7 @@ const router = useRouter();
 function signOutUser() {
   signOut(auth)
     .then(() => {
-      router.push("/logout");
+      router.push("/");
     })
     .catch((error) => {
       console.log(error);

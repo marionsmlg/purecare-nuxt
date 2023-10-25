@@ -19,6 +19,10 @@ import { ref, computed } from "vue";
 
 const auth = getAuth(firebaseApp);
 
+if (process.client) {
+  localStorage.clear();
+}
+
 const mainButtonRoute = ref("");
 
 onAuthStateChanged(auth, (user) => {
@@ -121,14 +125,12 @@ useSeoMeta({
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
   ogDescription:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
-  ogImage:
-    "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
+  ogImage: "/purecare-logo.jpg",
   twitterCard: "summary_large_image",
   twitterTitle: "PureCare : des soins sains pour une beauté durable",
   twitterDescription:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
-  twitterImage:
-    "https://i.notretemps.com/1800x0/smart/2021/04/20/cosmetiques-maison-lancez-vous.jpeg",
+  twitterImage: "/purecare-logo.jpg",
 });
 </script>
 

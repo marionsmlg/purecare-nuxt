@@ -1,16 +1,5 @@
-<script setup>
-import { ref } from "vue";
-
-let showBanner = ref(true);
-
-// function hideBanner() {
-//   showBanner.value = false
-// }
-</script>
-
 <template>
   <div
-    v-if="showBanner"
     class="relative isolate flex items-center gap-x-6 rounded-xl overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5"
   >
     <div
