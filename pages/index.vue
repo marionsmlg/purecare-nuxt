@@ -125,12 +125,12 @@ useSeoMeta({
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
   ogDescription:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
-  ogImage: "/purecare-logo.jpg",
+  ogImage: "/purecare-logo.png",
   twitterCard: "summary_large_image",
   twitterTitle: "PureCare : des soins sains pour une beauté durable",
   twitterDescription:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
-  twitterImage: "/purecare-logo.jpg",
+  twitterImage: "/purecare-logo.png",
 });
 </script>
 
