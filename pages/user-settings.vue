@@ -1,21 +1,20 @@
 <script setup>
 import { ref } from "vue";
 import {
-  getAuth,
   onAuthStateChanged,
   updateEmail,
   deleteUser,
   sendEmailVerification,
 } from "firebase/auth";
-import { firebaseApp } from "@/firebaseconfig.js";
+
 import { apiUrl, deleteData } from "@/utils.js";
 
 const router = useRouter();
-const auth = getAuth(firebaseApp);
-const user = auth.currentUser;
+const { $auth } = useNuxtApp();
+const user = $auth.currentUser;
 const newUserEmail = ref("");
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged($auth, (user) => {
   if (user) {
     newUserEmail.value = user.email;
   } else {
@@ -23,7 +22,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 async function updateUserEmail() {
-  updateEmail(auth.currentUser, newUserEmail.value)
+  updateEmail($auth.currentUser, newUserEmail.value)
     .then(() => {
       console.log("l'email a bien ete modifie !");
     })
@@ -33,7 +32,7 @@ async function updateUserEmail() {
 }
 
 async function deleteCurrentUser() {
-  const user = auth.currentUser;
+  const user = $auth.currentUser;
   try {
     await deleteData(`${apiUrl}/api/v1/users`);
     await deleteUser(user);
@@ -44,7 +43,7 @@ async function deleteCurrentUser() {
 }
 
 async function verifyEmail() {
-  await sendEmailVerification(auth.currentUser);
+  await sendEmailVerification($auth.currentUser);
   console.log("email sent");
 }
 
@@ -65,7 +64,7 @@ useSeoMeta({
 
 definePageMeta({
   middleware: "auth",
-  middleware: "user-beauty-profile",
+  // middleware: "user-beauty-profile",
 });
 </script>
 

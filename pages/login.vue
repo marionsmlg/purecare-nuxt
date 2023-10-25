@@ -1,6 +1,5 @@
 <script setup>
 import {
-  getAuth,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
@@ -8,10 +7,9 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { ref, computed } from "vue";
-import { firebaseApp } from "@/firebaseconfig.js";
-import { apiUrl, fetchUserBeautyProfile } from "@/utils.js";
+import { fetchUserBeautyProfile } from "@/utils.js";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 const userEmail = ref();
 const userPassword = ref();
@@ -21,7 +19,7 @@ const router = useRouter();
 async function loginWithFacebook() {
   const provider = new FacebookAuthProvider();
   try {
-    const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup($auth, provider);
     const user = result.user;
 
     const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
@@ -38,7 +36,7 @@ async function loginWithFacebook() {
 async function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
-    const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup($auth, provider);
     const user = result.user;
     const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
     if (hasBeautyProfile) {
@@ -55,7 +53,7 @@ const showErrorMessage = ref(false);
 const errorMessage = ref("");
 
 const loginUser = computed(() => {
-  signInWithEmailAndPassword(auth, userEmail.value, userPassword.value)
+  signInWithEmailAndPassword($auth, userEmail.value, userPassword.value)
     .then((userCredential) => {
       const user = userCredential.user;
       router.push("/mes-recettes");
@@ -70,7 +68,7 @@ const loginUser = computed(() => {
 });
 
 // async function forgotPassword() {
-//   await sendPasswordResetEmail(auth, 'marion.schimmerling@hotmail.fr')
+//   await sendPasswordResetEmail($auth, 'marion.schimmerling@hotmail.fr')
 // }
 
 useSeoMeta({
@@ -88,9 +86,9 @@ useSeoMeta({
   twitterImage: "/purecare-logo.png",
 });
 
-definePageMeta({
-  middleware: "not-auth",
-});
+// definePageMeta({
+//   middleware: "not-auth",
+// });
 </script>
 
 <template>

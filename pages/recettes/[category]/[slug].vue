@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import {
   BeakerIcon,
   ChevronUpIcon,

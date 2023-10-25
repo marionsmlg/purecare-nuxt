@@ -8,7 +8,6 @@ import IconWavyHair from "@/components/icons/HairTypes/IconWavyHair.vue";
 import IconCurlyHair from "@/components/icons/HairTypes/IconCurlyHair.vue";
 import { markRaw } from "vue";
 import { z } from "zod";
-import { auth } from "@/firebaseconfig.js";
 
 export function addIcon(objectWithoutIcon) {
   const arrOfIcons = [
@@ -100,7 +99,7 @@ export function uidFirebaseValid(uidFirebase) {
 export async function postData(url, data) {
   try {
     console.log(data);
-    const user = auth.currentUser;
+    const user = $auth.currentUser;
     if (user) {
       const token = await user.getIdToken();
       await fetch(url, {
@@ -121,7 +120,7 @@ export async function postData(url, data) {
 
 export async function updateData(url, data) {
   try {
-    const user = auth.currentUser;
+    const user = $auth.currentUser;
     if (user) {
       const token = await user.getIdToken();
       await fetch(url, {
@@ -141,7 +140,7 @@ export async function updateData(url, data) {
 }
 
 export async function deleteData(url) {
-  const user = auth.currentUser;
+  const user = $auth.currentUser;
   try {
     if (user) {
       const token = await user.getIdToken();
@@ -202,7 +201,7 @@ export async function fetchBeautyProfile(queryParams) {
 
 export async function checkUserAuthentication() {
   return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = $auth.onAuthStateChanged((user) => {
       unsubscribe(); // Arrête d'écouter après la première notification
       if (user) {
         resolve(user.uid);

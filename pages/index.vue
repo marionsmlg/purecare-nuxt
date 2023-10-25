@@ -12,12 +12,11 @@ import ButtonPrimary from "../components/buttons/ButtonPrimary.vue";
 import ListBox from "../components/buttons/ListBox.vue";
 import IconPeople from "../components/icons/IconPeople.vue";
 import IconMolecule from "../components/icons/IconMolecule.vue";
-import { firebaseApp } from "@/firebaseconfig.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { apiUrl } from "@/utils.js";
 import { ref, computed } from "vue";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 if (process.client) {
   localStorage.clear();
@@ -25,7 +24,7 @@ if (process.client) {
 
 const mainButtonRoute = ref("");
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged($auth, (user) => {
   if (user) {
     mainButtonRoute.value = "/mes-recettes";
   } else {

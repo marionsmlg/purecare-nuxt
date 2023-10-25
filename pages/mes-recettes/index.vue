@@ -16,10 +16,9 @@ import {
 } from "@/utils.js";
 import Banner from "@/components/Banner.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
-import { firebaseApp } from "@/firebaseconfig.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 const isUserLoggedIn = ref(false);
 
@@ -122,7 +121,7 @@ async function fetchUserRecipes(userId) {
   await Promise.all([getBeautyProfile(), getRecipes()]);
 }
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
     await fetchUserRecipes(user.uid);

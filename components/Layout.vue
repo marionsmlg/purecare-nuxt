@@ -10,15 +10,14 @@ import {
 
 import PurecareLogo from "@/components/PurecareLogo.vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { firebaseApp } from "@/firebaseconfig.js";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { ref } from "vue";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 const isUserLoggedIn = ref(false);
 
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
   } else {
@@ -29,7 +28,7 @@ onAuthStateChanged(auth, async (user) => {
 const router = useRouter();
 
 function signOutUser() {
-  signOut(auth)
+  signOut($auth)
     .then(() => {
       router.push("/");
     })

@@ -7,17 +7,16 @@ import {
   FacebookAuthProvider,
   sendEmailVerification,
 } from "firebase/auth";
-import { ref, computed } from "vue";
-import { firebaseApp } from "@/firebaseconfig.js";
+import { ref } from "vue";
 import { apiUrl, fetchUserBeautyProfile, postData } from "@/utils.js";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 const router = useRouter();
 
 async function loginWithFacebook() {
   const provider = new FacebookAuthProvider();
   try {
-    const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup($auth, provider);
     const user = result.user;
     const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
     if (hasBeautyProfile) {
@@ -33,7 +32,7 @@ async function loginWithFacebook() {
 async function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
-    const result = await signInWithPopup(auth, provider);
+    const result = await signInWithPopup($auth, provider);
     const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
     if (hasBeautyProfile) {
       router.push("/mes-recettes");
@@ -71,7 +70,7 @@ const errorMessage = ref("");
 
 async function createUser() {
   if (userPassword.value === userConfirmPassword.value) {
-    createUserWithEmailAndPassword(auth, userEmail.value, userPassword.value)
+    createUserWithEmailAndPassword($auth, userEmail.value, userPassword.value)
       .then(async (userCredential) => {
         const user = userCredential.user;
         const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);

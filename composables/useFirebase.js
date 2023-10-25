@@ -1,0 +1,16 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useFirebaseUser } from "./useStates";
+
+export const initUser = async () => {
+  const auth = getAuth();
+  const firebaseUser = useFirebaseUser();
+  firebaseUser.value = auth.currentUser;
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("Auth changed:", user);
+    } else {
+      console.log("Auth changed:", user);
+    }
+    firebaseUser.value = user;
+  });
+};

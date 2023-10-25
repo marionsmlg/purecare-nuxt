@@ -8,12 +8,11 @@ import {
   fetchUserBeautyProfile,
   fetchRecipes,
 } from "@/utils.js";
-import { firebaseApp } from "@/firebaseconfig.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 const route = useRoute();
 const recipeCategoryName = route.params.category;
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 const isUserLoggedIn = ref(false);
 
@@ -78,7 +77,7 @@ async function fetchUserRecipes(userId) {
   await getRecipes();
 }
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged($auth, (user) => {
   if (user) {
     isUserLoggedIn.value = true;
     fetchUserRecipes(user.uid);

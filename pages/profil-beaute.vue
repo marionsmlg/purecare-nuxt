@@ -1,15 +1,13 @@
 <script setup>
-import { ChevronLeftIcon } from "@heroicons/vue/20/solid";
 import SkinTypes from "../components/beauty-profile/SkinTypes.vue";
 import SkinHairProblems from "../components/beauty-profile/SkinHairProblems.vue";
 import HairTypes from "../components/beauty-profile/HairTypes.vue";
 import BackButton from "../components/buttons/BackButton.vue";
 import { ref, computed } from "vue";
-import { apiUrl, uuidIsValid, uidFirebaseValid, postData } from "@/utils.js";
-import { firebaseApp } from "@/firebaseconfig.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { apiUrl, uuidIsValid, postData } from "@/utils.js";
+import { onAuthStateChanged } from "firebase/auth";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 const skinProblems = ref([]);
 const hairProblems = ref([]);
@@ -119,7 +117,7 @@ async function quizDataExists() {
 
 async function findRecipes() {
   const quizDataAreValid = await quizDataExists();
-  onAuthStateChanged(auth, async (user) => {
+  onAuthStateChanged($auth, async (user) => {
     if (user && quizDataAreValid && quizDataAreUuids()) {
       postData(`${apiUrl}/api/v1/users`, {
         skin_type_id: selectedOption.value["skinType"],

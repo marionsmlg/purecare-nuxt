@@ -1,5 +1,4 @@
 import { fetchUserBeautyProfile, checkUserAuthentication } from "@/utils.js";
-import { auth } from "@/firebaseconfig.js";
 
 function isbeautyProfileCompleted(user, hasBeautyProfile) {
   if (process.client) {
@@ -14,9 +13,11 @@ function isbeautyProfileCompleted(user, hasBeautyProfile) {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const user = auth.currentUser;
-  const hasBeautyProfile = await fetchUserBeautyProfile(user);
-  if (isbeautyProfileCompleted(user, hasBeautyProfile)) {
+  const { $auth } = useNuxtApp();
+  const hasBeautyProfile = await fetchUserBeautyProfile(
+    $auth?.currentUser?.uid
+  );
+  if (isbeautyProfileCompleted($auth?.currentUser?.uid, hasBeautyProfile)) {
     return navigateTo("/");
   }
 });

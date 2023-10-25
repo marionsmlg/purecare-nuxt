@@ -1,11 +1,7 @@
-import { checkUserAuthentication } from "@/utils.js";
-import { auth } from "@/firebaseconfig.js";
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const { $auth } = useNuxtApp();
 
-export default defineNuxtRouteMiddleware((to, from) => {
-  const user = auth.currentUser;
-  console.log(user);
-
-  if (user) {
+  if ($auth?.currentUser?.uid) {
     return navigateTo("/mes-recettes");
   }
 });

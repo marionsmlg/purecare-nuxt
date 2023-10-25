@@ -5,10 +5,9 @@ import HairTypes from "../components/beauty-profile/HairTypes.vue";
 import BackButton from "../components/buttons/BackButton.vue";
 import { ref, computed } from "vue";
 import { apiUrl, updateData, fetchUserBeautyProfile } from "@/utils.js";
-import { firebaseApp } from "@/firebaseconfig.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
-const auth = getAuth(firebaseApp);
+const { $auth } = useNuxtApp();
 
 const skinProblems = ref([]);
 const hairProblems = ref([]);
@@ -59,7 +58,7 @@ const allQuestionsAnswered = computed(() => {
   );
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged($auth, (user) => {
   if (user) {
     fetchUserData(user.uid);
   }
@@ -95,7 +94,7 @@ async function quizDataExists() {
 
 async function findRecipes() {
   const quizDataAreValid = await quizDataExists();
-  onAuthStateChanged(auth, async (user) => {
+  onAuthStateChanged($auth, async (user) => {
     if (user && quizDataAreValid) {
       await updateData(`${apiUrl}/api/v1/users`, {
         skin_type_id: selectedSkinType.value,
