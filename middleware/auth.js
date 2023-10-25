@@ -1,8 +1,8 @@
 import { checkUserAuthentication } from "@/utils.js";
-
-const user = await checkUserAuthentication();
+import { auth } from "@/firebaseconfig.js";
 
 export default defineNuxtRouteMiddleware((to, from) => {
+  const user = auth.currentUser;
   if (!user) {
     return navigateTo("/login");
   }
