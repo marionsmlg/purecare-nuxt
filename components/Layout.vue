@@ -30,8 +30,8 @@ const router = useRouter();
 function signOutUser() {
   signOut($auth)
     .then(() => {
-      const token = useCookie("token"); // useCookie new hook in nuxt 3
-      token.value = null; // clear the token cookie
+      const token = useCookie("token");
+      token.value = null;
       router.push("/");
     })
     .catch((error) => {
