@@ -1,6 +1,5 @@
 <script setup>
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
@@ -18,8 +17,12 @@ async function loginWithFacebook() {
   try {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
-    const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
+    const hasBeautyProfile = await fetchUserBeautyProfile(
+      await user.getIdToken()
+    );
     if (hasBeautyProfile) {
+      const token = useCookie("token");
+      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -33,8 +36,13 @@ async function loginWithGoogle() {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup($auth, provider);
-    const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
+    const user = result.user;
+    const hasBeautyProfile = await fetchUserBeautyProfile(
+      await user.getIdToken()
+    );
     if (hasBeautyProfile) {
+      const token = useCookie("token");
+      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -66,7 +74,6 @@ const beautyProfileCompleted = Boolean(
     strOfSkinProblemId.value &&
     strOfHairProblemId.value
 );
-console.log({ beautyProfileCompleted });
 
 const showErrorMessage = ref(false);
 const errorMessage = ref("");
@@ -76,7 +83,11 @@ async function createUser() {
     createUserWithEmailAndPassword($auth, userEmail.value, userPassword.value)
       .then(async (userCredential) => {
         const user = userCredential.user;
-        const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
+        const token = useCookie("token");
+        token.value = await user.getIdToken();
+        const hasBeautyProfile = await fetchUserBeautyProfile(
+          await user.getIdToken()
+        );
         if (beautyProfileCompleted && !hasBeautyProfile) {
           const arrOfHairProblemId = JSON.parse(strOfHairProblemId);
           const arrOfSkinProblemId = JSON.parse(strOfSkinProblemId);

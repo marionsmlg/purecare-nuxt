@@ -13,13 +13,10 @@ function isbeautyProfileCompleted() {
 }
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { $auth } = useNuxtApp();
-  const hasBeautyProfile = await fetchUserBeautyProfile($auth.currentUser?.uid);
-  if (
-    !isbeautyProfileCompleted() &&
-    !$auth.currentUser?.uid &&
-    !hasBeautyProfile
-  ) {
+  const token = useCookie("token");
+  const hasBeautyProfile = await fetchUserBeautyProfile(token.value);
+
+  if (!isbeautyProfileCompleted() && !token.value && !hasBeautyProfile) {
     return navigateTo("/profil-beaute");
   }
 });

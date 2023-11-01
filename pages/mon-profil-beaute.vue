@@ -58,9 +58,9 @@ const allQuestionsAnswered = computed(() => {
   );
 });
 
-onAuthStateChanged($auth, (user) => {
+onAuthStateChanged($auth, async (user) => {
   if (user) {
-    fetchUserData(user.uid);
+    fetchUserData(await user.getIdToken());
   }
 });
 

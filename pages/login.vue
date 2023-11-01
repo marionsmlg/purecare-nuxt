@@ -22,8 +22,12 @@ async function loginWithFacebook() {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
 
-    const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
+    const hasBeautyProfile = await fetchUserBeautyProfile(
+      await user.getIdToken()
+    );
     if (hasBeautyProfile) {
+      const token = useCookie("token");
+      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -38,8 +42,12 @@ async function loginWithGoogle() {
   try {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
-    const hasBeautyProfile = await fetchUserBeautyProfile(user.uid);
+    const hasBeautyProfile = await fetchUserBeautyProfile(
+      await user.getIdToken()
+    );
     if (hasBeautyProfile) {
+      const token = useCookie("token");
+      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -54,8 +62,10 @@ const errorMessage = ref("");
 
 const loginUser = computed(() => {
   signInWithEmailAndPassword($auth, userEmail.value, userPassword.value)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       const user = userCredential.user;
+      const token = useCookie("token"); // useCookie new hook in nuxt 3
+      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     })
     .catch((error) => {

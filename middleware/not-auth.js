@@ -1,7 +1,7 @@
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { $auth } = useNuxtApp();
+export default defineNuxtRouteMiddleware((to, from) => {
+  const token = useCookie("token");
 
-  if ($auth?.currentUser?.uid) {
+  if (token.value) {
     return navigateTo("/mes-recettes");
   }
 });

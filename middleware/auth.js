@@ -1,7 +1,8 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  const { $auth } = useNuxtApp();
+export default defineNuxtRouteMiddleware((to) => {
+  const token = useCookie("token");
 
-  if (!$auth.currentUser?.uid) {
-    return abortNavigation();
+  if (!token.value && to?.name !== "login") {
+    abortNavigation();
+    return navigateTo("/login");
   }
 });

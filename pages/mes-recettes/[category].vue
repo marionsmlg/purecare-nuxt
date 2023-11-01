@@ -77,10 +77,10 @@ async function fetchUserRecipes(userId) {
   await getRecipes();
 }
 
-onAuthStateChanged($auth, (user) => {
+onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    fetchUserRecipes(user.uid);
+    fetchUserRecipes(await user.getIdToken());
   } else {
     isUserLoggedIn.value = false;
     hairTypeId.value = localStorage.getItem("hairType") || "";

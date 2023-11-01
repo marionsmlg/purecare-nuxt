@@ -99,7 +99,6 @@ export function uidFirebaseValid(uidFirebase) {
 export async function postData(url, data) {
   const { $auth } = useNuxtApp();
   try {
-    console.log(data);
     const user = $auth.currentUser;
     if (user) {
       const token = await user.getIdToken();
@@ -162,19 +161,23 @@ export async function deleteData(url) {
   }
 }
 
-export async function fetchUserBeautyProfile(userId) {
+export async function fetchUserBeautyProfile(userToken) {
   try {
-    const queryString = `/api/v1/user-beauty-profile?user_id=${userId}`;
-    const url = apiUrl + queryString;
-    const response = await fetch(url);
-    const dataUser = await response.json();
-    if (dataUser.physicalTrait.length === 0) {
-      return false;
+    if (userToken) {
+      const queryString = `/api/v1/user-beauty-profile?user_token=${userToken}`;
+      const url = apiUrl + queryString;
+      const response = await fetch(url);
+      const dataUser = await response.json();
+      if (dataUser.physicalTrait.length === 0) {
+        return false;
+      } else {
+        return dataUser;
+      }
     } else {
-      return dataUser;
+      return false;
     }
   } catch (error) {
-    console.error(error);
+    return false;
   }
 }
 
@@ -213,4 +216,24 @@ export async function checkUserAuthentication() {
       }
     });
   });
+}
+
+export async function checkUserAuth() {
+  const { $auth } = useNuxtApp();
+  const user = $auth.currentUser;
+  try {
+    if (user) {
+      const token = await user.getIdToken();
+      console.log(token);
+      const queryString = `/api/v1/user-logged-in?user_token=${token}`;
+      const url = apiUrl + queryString;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("L'utilisateur n'est pas connecté.");
+    }
+  } catch (error) {
+    return false;
+  }
 }

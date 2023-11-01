@@ -36,7 +36,11 @@ async function deleteCurrentUser() {
   try {
     await deleteData(`${apiUrl}/api/v1/users`);
     await deleteUser(user);
-    router.push("/");
+    const token = useCookie("token");
+    token.value = null;
+    if (!token.value) {
+      router.push("/");
+    }
   } catch (error) {
     console.error(error);
   }
