@@ -26,15 +26,24 @@ onAuthStateChanged($auth, async (user) => {
 });
 
 const router = useRouter();
+function clearTokenAndRedirect() {
+  return new Promise((resolve, reject) => {
+    const token = useCookie("token"); // Assurez-vous d'importer et d'utiliser correctement votre bibliothèque de cookies
 
+    // Définir la valeur du cookie à null
+    token.value = null;
+
+    // Rediriger l'utilisateur vers la page d'accueil ("/") après avoir effacé le cookie
+
+    resolve(); // La promesse est résolue après la redirection réussie
+  });
+}
+
+const token = useCookie("token");
 function signOutUser() {
   signOut($auth)
     .then(() => {
-      const token = useCookie("token");
-      token.value = null;
-      if (!token.value) {
-        router.push("/");
-      }
+      router.push("/logout");
     })
     .catch((error) => {
       console.log(error);
