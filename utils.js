@@ -205,36 +205,3 @@ export async function fetchBeautyProfile(queryParams) {
     console.error(error);
   }
 }
-
-export async function checkUserAuthentication() {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = $auth.onAuthStateChanged((user) => {
-      unsubscribe(); // Arrête d'écouter après la première notification
-      if (user) {
-        resolve(user.uid);
-      } else {
-        resolve(null);
-      }
-    });
-  });
-}
-
-export async function checkUserAuth() {
-  const { $auth } = useNuxtApp();
-  const user = $auth.currentUser;
-  try {
-    if (user) {
-      const token = await user.getIdToken();
-      console.log(token);
-      const queryString = `/api/v1/user-logged-in?user_token=${token}`;
-      const url = apiUrl + queryString;
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
-    } else {
-      console.error("L'utilisateur n'est pas connecté.");
-    }
-  } catch (error) {
-    return false;
-  }
-}

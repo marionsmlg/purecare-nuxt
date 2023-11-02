@@ -78,8 +78,8 @@ async function getRecipes() {
   hairProblemCount.value = countProblems(arrOfHairProblemId.value);
 }
 
-async function fetchUserData(userId) {
-  const dataUser = await fetchUserBeautyProfile(userId);
+async function fetchUserData(userToken) {
+  const dataUser = await fetchUserBeautyProfile(userToken);
   skinTypeId.value = dataUser.physicalTrait[0].skin_type_id;
   hairTypeId.value = dataUser.physicalTrait[0].hair_type_id;
   arrOfHairProblemId.value = pushObjectValueInNewArr(dataUser.hairIssue);
@@ -121,8 +121,8 @@ async function getBeautyProfile() {
   hairIssue.value = displayBeautyIssues(data.hairIssue);
 }
 
-async function fetchUserRecipes(userId) {
-  await fetchUserData(userId);
+async function fetchUserRecipes(userToken) {
+  await fetchUserData(userToken);
   await Promise.all([getBeautyProfile(), getRecipes()]);
 }
 

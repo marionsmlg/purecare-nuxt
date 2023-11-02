@@ -32,8 +32,8 @@ const selectedHairType = ref("");
 const selectedSkinProblem = ref([]);
 const selectedHairProblem = ref([]);
 
-async function fetchUserData(userId) {
-  const dataUser = await fetchUserBeautyProfile(userId);
+async function fetchUserData(userToken) {
+  const dataUser = await fetchUserBeautyProfile(userToken);
   selectedSkinType.value = dataUser.physicalTrait[0].skin_type_id;
   selectedHairType.value = dataUser.physicalTrait[0].hair_type_id;
 

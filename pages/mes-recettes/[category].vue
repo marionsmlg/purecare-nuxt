@@ -48,8 +48,8 @@ const canDisplayMoreRecipes = computed(() => {
   }
 });
 
-async function fetchUserData(userId) {
-  const dataUser = await fetchUserBeautyProfile(userId);
+async function fetchUserData(userToken) {
+  const dataUser = await fetchUserBeautyProfile(userToken);
   skinTypeId.value = dataUser.physicalTrait[0].skin_type_id;
   hairTypeId.value = dataUser.physicalTrait[0].hair_type_id;
   arrOfHairProblemId.value = pushObjectValueInNewArr(dataUser.hairIssue);
@@ -72,8 +72,8 @@ async function getRecipes() {
   hairRecipes.value = dataRecipes.hairRecipe;
 }
 
-async function fetchUserRecipes(userId) {
-  await fetchUserData(userId);
+async function fetchUserRecipes(userToken) {
+  await fetchUserData(userToken);
   await getRecipes();
 }
 
