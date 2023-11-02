@@ -30,15 +30,27 @@ async function updateUserEmail() {
       console.error(error);
     });
 }
+async function clearTokenAndRedirect() {
+  return new Promise((resolve) => {
+    const token = useCookie("token");
+    token.value = null;
+    const interval = setInterval(() => {
+      if (!token.value) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 100);
+  }).then(() => {
+    return router.push("/");
+  });
+}
 
 async function deleteCurrentUser() {
   const user = $auth.currentUser;
   try {
     await deleteData(`${apiUrl}/api/v1/users`);
     await deleteUser(user);
-    const token = useCookie("token");
-    token.value = null;
-    router.push("/");
+    await clearTokenAndRedirect();
   } catch (error) {
     console.error(error);
   }
