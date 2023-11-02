@@ -30,9 +30,11 @@ const router = useRouter();
 function signOutUser() {
   signOut($auth)
     .then(() => {
-      router.push("/");
       const token = useCookie("token");
       token.value = null;
+      if (!token.value) {
+        router.push("/");
+      }
     })
     .catch((error) => {
       console.log(error);
