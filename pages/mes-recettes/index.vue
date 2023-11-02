@@ -132,19 +132,21 @@ onAuthStateChanged($auth, async (user) => {
     await fetchUserRecipes(await user.getIdToken());
   } else {
     isUserLoggedIn.value = false;
-    hairTypeId.value = localStorage.getItem("hairType");
-    skinTypeId.value = localStorage.getItem("skinType");
-    const strOfHairProblemId = localStorage.getItem("hairProblem");
-    const strOfSkinProblemId = localStorage.getItem("skinProblem");
-    if (
-      strOfHairProblemId &&
-      strOfSkinProblemId &&
-      skinTypeId.value &&
-      hairTypeId.value
-    ) {
-      arrOfHairProblemId.value = JSON.parse(strOfHairProblemId);
-      arrOfSkinProblemId.value = JSON.parse(strOfSkinProblemId);
-      await Promise.all([getBeautyProfile(), getRecipes()]);
+    if (process.client) {
+      hairTypeId.value = localStorage.getItem("hairType");
+      skinTypeId.value = localStorage.getItem("skinType");
+      const strOfHairProblemId = localStorage.getItem("hairProblem");
+      const strOfSkinProblemId = localStorage.getItem("skinProblem");
+      if (
+        strOfHairProblemId &&
+        strOfSkinProblemId &&
+        skinTypeId.value &&
+        hairTypeId.value
+      ) {
+        arrOfHairProblemId.value = JSON.parse(strOfHairProblemId);
+        arrOfSkinProblemId.value = JSON.parse(strOfSkinProblemId);
+        await Promise.all([getBeautyProfile(), getRecipes()]);
+      }
     }
   }
 });

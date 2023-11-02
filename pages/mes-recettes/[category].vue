@@ -83,15 +83,17 @@ onAuthStateChanged($auth, async (user) => {
     fetchUserRecipes(await user.getIdToken());
   } else {
     isUserLoggedIn.value = false;
-    hairTypeId.value = localStorage.getItem("hairType") || "";
-    skinTypeId.value = localStorage.getItem("skinType") || "";
-    arrOfHairProblemId.value = JSON.parse(
-      localStorage.getItem("hairProblem") || ""
-    );
-    arrOfSkinProblemId.value = JSON.parse(
-      localStorage.getItem("skinProblem") || ""
-    );
-    getRecipes();
+    if (process.client) {
+      hairTypeId.value = localStorage.getItem("hairType") || "";
+      skinTypeId.value = localStorage.getItem("skinType") || "";
+      arrOfHairProblemId.value = JSON.parse(
+        localStorage.getItem("hairProblem") || ""
+      );
+      arrOfSkinProblemId.value = JSON.parse(
+        localStorage.getItem("skinProblem") || ""
+      );
+      getRecipes();
+    }
   }
 });
 
