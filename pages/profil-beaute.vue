@@ -126,7 +126,12 @@ async function findRecipes() {
         hair_issue_id: selectedHairProblem.value.join(","),
       }).then(() => router.push("/mes-recettes"));
     } else {
-      if (quizDataAreValid && quizDataAreUuids() && allQuestionsAnswered) {
+      if (
+        quizDataAreValid &&
+        quizDataAreUuids() &&
+        allQuestionsAnswered &&
+        process.client
+      ) {
         localStorage.setItem("skinType", selectedOption.value["skinType"]);
         localStorage.setItem("hairType", selectedOption.value["hairType"]);
         localStorage.setItem(

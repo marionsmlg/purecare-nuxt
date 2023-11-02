@@ -11,7 +11,7 @@ import { apiUrl, deleteData } from "@/utils.js";
 
 const router = useRouter();
 const { $auth } = useNuxtApp();
-const user = $auth.currentUser;
+
 const newUserEmail = ref("");
 
 onAuthStateChanged($auth, (user) => {
@@ -52,7 +52,7 @@ async function verifyEmail() {
 }
 
 useSeoMeta({
-  title: "Paramètres",
+  title: "Mes paramètres",
   ogTitle: "PureCare : des soins sains pour une beauté durable",
   description:
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
@@ -67,8 +67,7 @@ useSeoMeta({
 });
 
 definePageMeta({
-  middleware: "auth",
-  // middleware: "user-beauty-profile",
+  middleware: "user-beauty-profile",
 });
 </script>
 

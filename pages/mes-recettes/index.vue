@@ -14,7 +14,7 @@ import {
 } from "@/utils.js";
 import Banner from "@/components/Banner.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, onIdTokenChanged } from "firebase/auth";
 
 const { $auth } = useNuxtApp();
 
@@ -53,6 +53,13 @@ function countProblems(arrOfProblemId) {
     return 0;
   }
 }
+const token = useCookie("token");
+
+onMounted(() => {
+  if (token.value) {
+    localStorage.clear();
+  }
+});
 
 async function getRecipes() {
   const queryParams = new URLSearchParams({

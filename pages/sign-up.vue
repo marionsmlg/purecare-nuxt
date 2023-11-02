@@ -17,12 +17,12 @@ async function loginWithFacebook() {
   try {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
+    const token = useCookie("token");
+    token.value = await user.getIdToken();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken()
     );
     if (hasBeautyProfile) {
-      const token = useCookie("token");
-      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -37,12 +37,13 @@ async function loginWithGoogle() {
   try {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
+    const token = useCookie("token");
+    token.value = await user.getIdToken();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken()
     );
+    console.log({ hasBeautyProfile });
     if (hasBeautyProfile) {
-      const token = useCookie("token");
-      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -89,11 +90,11 @@ async function createUser() {
           await user.getIdToken()
         );
         if (beautyProfileCompleted && !hasBeautyProfile) {
-          const arrOfHairProblemId = JSON.parse(strOfHairProblemId);
-          const arrOfSkinProblemId = JSON.parse(strOfSkinProblemId);
+          const arrOfHairProblemId = JSON.parse(strOfHairProblemId.value);
+          const arrOfSkinProblemId = JSON.parse(strOfSkinProblemId.value);
           postData(`${apiUrl}/api/v1/users`, {
-            skin_type_id: skinTypeId,
-            hair_type_id: hairTypeId,
+            skin_type_id: skinTypeId.value,
+            hair_type_id: hairTypeId.value,
             skin_issue_id: arrOfSkinProblemId.join(","),
             hair_issue_id: arrOfHairProblemId.join(","),
           }).then(() => router.push("/mes-recettes"));

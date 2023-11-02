@@ -21,13 +21,13 @@ async function loginWithFacebook() {
   try {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
+    const token = useCookie("token");
+    token.value = await user.getIdToken();
 
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken()
     );
     if (hasBeautyProfile) {
-      const token = useCookie("token");
-      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");
@@ -42,12 +42,12 @@ async function loginWithGoogle() {
   try {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
+    const token = useCookie("token");
+    token.value = await user.getIdToken();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken()
     );
     if (hasBeautyProfile) {
-      const token = useCookie("token");
-      token.value = await user.getIdToken();
       router.push("/mes-recettes");
     } else {
       router.push("/profil-beaute");

@@ -98,6 +98,7 @@ export function uidFirebaseValid(uidFirebase) {
 
 export async function postData(url, data) {
   const { $auth } = useNuxtApp();
+  console.log(data);
   try {
     const user = $auth.currentUser;
     if (user) {
