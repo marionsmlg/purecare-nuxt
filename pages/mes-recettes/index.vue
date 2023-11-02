@@ -14,7 +14,7 @@ import {
 } from "@/utils.js";
 import Banner from "@/components/Banner.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
-import { onAuthStateChanged, onIdTokenChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 const { $auth } = useNuxtApp();
 

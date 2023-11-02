@@ -30,9 +30,9 @@ const router = useRouter();
 function signOutUser() {
   signOut($auth)
     .then(() => {
+      router.push("/");
       const token = useCookie("token");
       token.value = null;
-      router.push("/");
     })
     .catch((error) => {
       console.log(error);
@@ -113,7 +113,7 @@ function signOutUser() {
                 <MenuItem v-slot="{ active, close }" as="div">
                   <NuxtLink
                     @click="close"
-                    to="/user-settings"
+                    to="/mes-parametres"
                     :class="[
                       active ? 'bg-[#C7E8F1]' : 'text-gray-900',
                       'group flex w-full items-center rounded-md px-2 py-2 text-sm',
@@ -124,7 +124,7 @@ function signOutUser() {
                       class="mr-2 h-5 w-5 text-[#0C8294]"
                       aria-hidden="true"
                     />
-                    Paramètres
+                    Mes paramètres
                   </NuxtLink>
                 </MenuItem>
               </div>
