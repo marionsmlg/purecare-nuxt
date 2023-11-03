@@ -8,6 +8,7 @@ import IconWavyHair from "@/components/icons/HairTypes/IconWavyHair.vue";
 import IconCurlyHair from "@/components/icons/HairTypes/IconCurlyHair.vue";
 import { markRaw } from "vue";
 import { z } from "zod";
+import { onAuthStateChanged } from "firebase/auth";
 
 export function addIcon(objectWithoutIcon) {
   const arrOfIcons = [
@@ -208,8 +209,11 @@ export async function fetchBeautyProfile(queryParams) {
 
 export async function refreshToken() {
   const { $auth } = useNuxtApp();
-  const user = $auth.currentUser;
-  const newToken = await user.getIdToken(true);
-  const token = useCookie("token");
-  token.value = newToken;
+  onAuthStateChanged($auth, async (user) => {
+    if (user) {
+      const newToken = await user.getIdToken(true);
+      const token = useCookie("token");
+      token.value = newToken;
+    }
+  });
 }

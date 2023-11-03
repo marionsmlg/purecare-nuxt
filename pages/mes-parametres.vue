@@ -134,6 +134,31 @@ definePageMeta({
         </div>
       </div>
     </div>
+
+    <div
+      class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8"
+    >
+      <div>
+        <h2 class="text-base font-semibold leading-7">Supprimer le compte</h2>
+        <p class="mt-1 text-sm leading-6 text-gray-400">
+          Vous ne souhaitez plus utiliser nos services ? Vous pouvez supprimer
+          votre compte ici. Cette action n'est pas réversible. Toutes les
+          informations relatives à ce compte seront définitivement supprimées.
+        </p>
+      </div>
+
+      <form
+        class="flex items-start md:col-span-2"
+        @submit.prevent="deleteCurrentUser"
+      >
+        <button
+          type="submit"
+          class="rounded-xl bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400"
+        >
+          Supprimer mon compte
+        </button>
+      </form>
+    </div>
   </div>
 
   <div v-else class="xl:pl-72">
