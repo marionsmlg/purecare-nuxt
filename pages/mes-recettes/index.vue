@@ -53,11 +53,14 @@ function countProblems(arrOfProblemId) {
     return 0;
   }
 }
+
 const token = useCookie("token");
+const beautyProfile = useCookie("beautyProfile");
 
 onMounted(() => {
   if (token.value) {
     localStorage.clear();
+    beautyProfile.value = null;
   }
 });
 

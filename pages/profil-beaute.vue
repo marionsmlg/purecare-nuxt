@@ -115,6 +115,21 @@ async function quizDataExists() {
   }
 }
 
+async function setCookieAndRedirect() {
+  return new Promise((resolve) => {
+    const beautyProfile = useCookie("beautyProfile");
+    beautyProfile.value = true;
+    const interval = setInterval(() => {
+      if (beautyProfile.value) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 100);
+  }).then(() => {
+    return router.push("/mes-recettes");
+  });
+}
+
 async function findRecipes() {
   const quizDataAreValid = await quizDataExists();
   onAuthStateChanged($auth, async (user) => {
@@ -142,7 +157,7 @@ async function findRecipes() {
           "hairProblem",
           JSON.stringify(selectedHairProblem.value)
         );
-        router.push("/mes-recettes");
+        await setCookieAndRedirect();
       } else {
         console.error("Les donnees ne sont pas valides!!!");
       }

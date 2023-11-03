@@ -18,9 +18,14 @@ import { ref, computed } from "vue";
 
 const { $auth } = useNuxtApp();
 
-if (process.client) {
-  localStorage.clear();
+function resetLocalStorage() {
+  if (process.client) {
+    localStorage.clear();
+  }
+  const beautyProfile = useCookie("beautyProfile");
+  beautyProfile.value = null;
 }
+resetLocalStorage();
 
 const mainButtonRoute = ref("");
 
