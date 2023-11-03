@@ -126,7 +126,7 @@ const navigation = {
           </div>
         </div> -->
       </div>
-      <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
+      <div class="mt-10 border-t border-gray-900/10 pt-8 sm:mt-12 lg:mt-16">
         <p class="text-xs leading-5 text-gray-500">
           &copy; 2023 PureCare, Inc. All rights reserved.
         </p>

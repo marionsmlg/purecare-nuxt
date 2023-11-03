@@ -18,7 +18,6 @@ const newUserEmail = ref("");
 const user = $auth.currentUser;
 const providerId = user.providerData[0].providerId;
 const provider = providerId.split(".com").join("");
-console.log(providerId.split(".com").join(""));
 
 onAuthStateChanged($auth, (user) => {
   if (user) {
@@ -90,7 +89,7 @@ definePageMeta({
 <template>
   <div v-if="providerId !== 'password'" class="divide-y divide-white/5">
     <div
-      class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 lg:py-36 sm:px-6 md:grid-cols-3 lg:px-8"
+      class="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 lg:pb-36 sm:px-6 md:grid-cols-3 lg:px-8"
     >
       <h2 class="text-base font-semibold leading-7">
         Informations personelles
@@ -101,13 +100,16 @@ definePageMeta({
           class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6"
         >
           <div class="col-span-full flex items-center gap-x-4">
-            <component
-              :is="provider === 'google' ? GoogleIcon : FacebookIcon"
-              class="w-6 h-6"
-            />
+            <div class="min-w-fit">
+              <component
+                :is="provider === 'google' ? GoogleIcon : FacebookIcon"
+                class="w-6 h-6"
+              />
+            </div>
 
             <p class="text-sm leading-5 font-semibold text-gray-600">
-              Connexion avec <span class="capitalize">{{ provider }}</span>
+              Vous êtes connecté avec
+              <span class="capitalize">{{ provider }}</span>
             </p>
           </div>
 
@@ -123,7 +125,7 @@ definePageMeta({
                 type="email"
                 disabled
                 autocomplete="email"
-                class="block w-full rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                class="block w-full max-w-xs rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
               />
             </div>
           </div>
