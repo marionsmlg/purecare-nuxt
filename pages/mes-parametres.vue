@@ -15,13 +15,14 @@ const router = useRouter();
 const { $auth } = useNuxtApp();
 
 const newUserEmail = ref("");
-const user = $auth.currentUser;
-const providerId = user.providerData[0].providerId;
-const provider = providerId.split(".com").join("");
+
+const provider = ref("");
 
 onAuthStateChanged($auth, (user) => {
   if (user) {
     newUserEmail.value = user.email;
+    const providerId = user.providerData[0].providerId;
+    provider.value = providerId.split(".com").join("");
   } else {
   }
 });
@@ -95,42 +96,44 @@ definePageMeta({
         Informations personelles
       </h2>
 
-      <form class="md:col-span-2">
-        <div
-          class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6"
-        >
-          <div class="col-span-full flex items-center gap-x-4">
-            <div class="min-w-fit">
-              <component
-                :is="provider === 'google' ? GoogleIcon : FacebookIcon"
-                class="w-6 h-6"
-              />
-            </div>
-
-            <p class="text-sm leading-5 font-semibold text-gray-600">
-              Vous êtes connecté avec
-              <span class="capitalize">{{ provider }}</span>
-            </p>
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
+        <div class="col-span-full flex items-center gap-x-4">
+          <div class="min-w-fit">
+            <component
+              :is="
+                provider === 'google'
+                  ? GoogleIcon
+                  : provider === 'facebook'
+                  ? FacebookIcon
+                  : ''
+              "
+              class="w-6 h-6"
+            />
           </div>
 
-          <div class="col-span-full">
-            <label for="email" class="block text-sm font-medium leading-6"
-              >Adresse e-mail</label
-            >
-            <div class="mt-2">
-              <input
-                v-model="newUserEmail"
-                id="email"
-                name="email"
-                type="email"
-                disabled
-                autocomplete="email"
-                class="block w-full max-w-xs rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-              />
-            </div>
+          <p class="text-sm leading-5 font-semibold text-gray-600">
+            Vous êtes connecté avec
+            <span class="capitalize">{{ provider }}</span>
+          </p>
+        </div>
+
+        <div class="col-span-full">
+          <label for="email" class="block text-sm font-medium leading-6"
+            >Adresse e-mail</label
+          >
+          <div class="mt-2">
+            <input
+              v-model="newUserEmail"
+              id="email"
+              name="email"
+              type="email"
+              disabled
+              autocomplete="email"
+              class="block w-full max-w-xs rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+            />
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 
