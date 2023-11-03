@@ -8,21 +8,24 @@ import {
 } from "firebase/auth";
 
 import { apiUrl, deleteData } from "@/utils.js";
-import FacebookIcon from "@/components/icons/SocialMedia/facebook.vue";
-import GoogleIcon from "@/components/icons/SocialMedia/google.vue";
+import FacebookIcon from "../components/icons/SocialMedia/facebook.vue";
+import GoogleIcon from "../components/icons/SocialMedia/google.vue";
+import NoIcon from "../components/icons/NoIcon.vue";
 
 const router = useRouter();
 const { $auth } = useNuxtApp();
 
 const newUserEmail = ref("");
-
-const provider = ref("");
+const providerId = ref("");
+const provider = ref(null);
 
 onAuthStateChanged($auth, (user) => {
   if (user) {
     newUserEmail.value = user.email;
-    const providerId = user.providerData[0].providerId;
-    provider.value = providerId.split(".com").join("");
+    providerId.value = user.providerData[0].providerId;
+    if (providerId.value.endsWith(".com")) {
+      provider.value = providerId.value.split(".com").join("");
+    }
   } else {
   }
 });
@@ -105,7 +108,7 @@ definePageMeta({
                   ? GoogleIcon
                   : provider === 'facebook'
                   ? FacebookIcon
-                  : ''
+                  : NoIcon
               "
               class="w-6 h-6"
             />
@@ -122,15 +125,11 @@ definePageMeta({
             >Adresse e-mail</label
           >
           <div class="mt-2">
-            <input
-              v-model="newUserEmail"
-              id="email"
-              name="email"
-              type="email"
-              disabled
-              autocomplete="email"
-              class="block w-full max-w-xs rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-            />
+            <div
+              class="block w-full max-w-fit px-2 rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+            >
+              {{ newUserEmail }}
+            </div>
           </div>
         </div>
       </div>
