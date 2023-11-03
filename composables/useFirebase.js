@@ -29,9 +29,9 @@ export async function loginWithFacebook() {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
     const token = useCookie("token");
-    token.value = await user.getIdToken();
+    token.value = await user.getIdToken(true);
     const hasBeautyProfile = await fetchUserBeautyProfile(
-      await user.getIdToken()
+      await user.getIdToken(true)
     );
     if (hasBeautyProfile) {
       router.push("/mes-recettes");
@@ -49,9 +49,9 @@ export async function loginWithGoogle() {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
     const token = useCookie("token");
-    token.value = await user.getIdToken();
+    token.value = await user.getIdToken(true);
     const hasBeautyProfile = await fetchUserBeautyProfile(
-      await user.getIdToken()
+      await user.getIdToken(true)
     );
     console.log({ hasBeautyProfile });
     if (hasBeautyProfile) {

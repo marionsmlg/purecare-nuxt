@@ -24,10 +24,10 @@ async function loginWithFacebook() {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
     const token = useCookie("token");
-    token.value = await user.getIdToken();
+    token.value = await user.getIdToken(true);
 
     const hasBeautyProfile = await fetchUserBeautyProfile(
-      await user.getIdToken()
+      await user.getIdToken(true)
     );
     if (hasBeautyProfile) {
       router.push("/mes-recettes");
@@ -45,9 +45,9 @@ async function loginWithGoogle() {
     const result = await signInWithPopup($auth, provider);
     const user = result.user;
     const token = useCookie("token");
-    token.value = await user.getIdToken();
+    token.value = await user.getIdToken(true);
     const hasBeautyProfile = await fetchUserBeautyProfile(
-      await user.getIdToken()
+      await user.getIdToken(true)
     );
     if (hasBeautyProfile) {
       router.push("/mes-recettes");
@@ -67,7 +67,7 @@ const loginUser = computed(() => {
     .then(async (userCredential) => {
       const user = userCredential.user;
       const token = useCookie("token"); // useCookie new hook in nuxt 3
-      token.value = await user.getIdToken();
+      token.value = await user.getIdToken(true);
       router.push("/mes-recettes");
     })
     .catch((error) => {

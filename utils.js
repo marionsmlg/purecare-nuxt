@@ -102,7 +102,7 @@ export async function postData(url, data) {
   try {
     const user = $auth.currentUser;
     if (user) {
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
       await fetch(url, {
         method: "POST",
         headers: {
@@ -124,7 +124,7 @@ export async function updateData(url, data) {
   try {
     const user = $auth.currentUser;
     if (user) {
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
       await fetch(url, {
         method: "PUT",
         headers: {
@@ -146,7 +146,7 @@ export async function deleteData(url) {
   const user = $auth.currentUser;
   try {
     if (user) {
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
       await fetch(url, {
         method: "DELETE",
         headers: {

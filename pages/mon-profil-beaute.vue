@@ -60,7 +60,7 @@ const allQuestionsAnswered = computed(() => {
 
 onAuthStateChanged($auth, async (user) => {
   if (user) {
-    fetchUserData(await user.getIdToken());
+    fetchUserData(await user.getIdToken(true));
   }
 });
 

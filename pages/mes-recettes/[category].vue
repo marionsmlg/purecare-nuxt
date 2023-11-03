@@ -80,7 +80,7 @@ async function fetchUserRecipes(userToken) {
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    fetchUserRecipes(await user.getIdToken());
+    fetchUserRecipes(await user.getIdToken(true));
   } else {
     isUserLoggedIn.value = false;
     if (process.client) {
