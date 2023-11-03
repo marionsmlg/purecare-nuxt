@@ -205,3 +205,11 @@ export async function fetchBeautyProfile(queryParams) {
     console.error(error);
   }
 }
+
+export async function refreshToken() {
+  const { $auth } = useNuxtApp();
+  const user = $auth.currentUser;
+  const newToken = await user.getIdToken(true);
+  const token = useCookie("token");
+  token.value = newToken;
+}
