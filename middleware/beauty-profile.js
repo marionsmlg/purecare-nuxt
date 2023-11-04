@@ -1,10 +1,18 @@
-import { fetchUserBeautyProfile } from "@/utils.js";
+import { fetchUserBeautyProfile, refreshToken } from "@/utils.js";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const beautyProfile = useCookie("beautyProfile");
   const token = useCookie("token");
-  const userHasBeautyProfile = await fetchUserBeautyProfile(token.value);
-  if (!beautyProfile.value && !token.value && !userHasBeautyProfile) {
+  if (!beautyProfile.value && !token.value) {
     return navigateTo("/profil-beaute");
+  }
+  if (token.value) {
+    refreshToken().then(async () => {
+      const token = useCookie("token");
+      const userHasBeautyProfile = await fetchUserBeautyProfile(token.value);
+      if (!token.value && !userHasBeautyProfile) {
+        return navigateTo("/profil-beaute");
+      }
+    });
   }
 });
