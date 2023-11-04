@@ -217,3 +217,20 @@ export async function refreshToken() {
     }
   });
 }
+
+export async function startTokenExpirationWatch() {
+  const { $auth } = useNuxtApp();
+  onAuthStateChanged($auth, (user) => {
+    if (user) {
+      const renewalTime = 3300000; // 55 min
+
+      setTimeout(async () => {
+        // Renouvelez le jeton
+        await refreshToken();
+        console.log("Nouveau jeton !!");
+        // Planifiez le renouvellement du jeton pour l'avenir
+        await startTokenExpirationWatch();
+      }, renewalTime);
+    }
+  });
+}

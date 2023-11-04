@@ -7,7 +7,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { ref, computed } from "vue";
-import { fetchUserBeautyProfile } from "@/utils.js";
+import { fetchUserBeautyProfile, startTokenExpirationWatch } from "@/utils.js";
 import FacebookIcon from "@/components/icons/SocialMedia/facebook.vue";
 import GoogleIcon from "@/components/icons/SocialMedia/google.vue";
 
@@ -25,7 +25,7 @@ async function loginWithFacebook() {
     const user = result.user;
     const token = useCookie("token");
     token.value = await user.getIdToken(true);
-
+    await startTokenExpirationWatch();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken(true)
     );
@@ -46,6 +46,7 @@ async function loginWithGoogle() {
     const user = result.user;
     const token = useCookie("token");
     token.value = await user.getIdToken(true);
+    await startTokenExpirationWatch();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken(true)
     );
@@ -66,8 +67,9 @@ const loginUser = computed(() => {
   signInWithEmailAndPassword($auth, userEmail.value, userPassword.value)
     .then(async (userCredential) => {
       const user = userCredential.user;
-      const token = useCookie("token"); // useCookie new hook in nuxt 3
+      const token = useCookie("token");
       token.value = await user.getIdToken(true);
+      await startTokenExpirationWatch();
       router.push("/mes-recettes");
     })
     .catch((error) => {

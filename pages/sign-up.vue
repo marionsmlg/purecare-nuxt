@@ -9,7 +9,12 @@ import {
 import { ref } from "vue";
 import FacebookIcon from "@/components/icons/SocialMedia/facebook.vue";
 import GoogleIcon from "@/components/icons/SocialMedia/google.vue";
-import { apiUrl, fetchUserBeautyProfile, postData } from "@/utils.js";
+import {
+  apiUrl,
+  fetchUserBeautyProfile,
+  postData,
+  startTokenExpirationWatch,
+} from "@/utils.js";
 
 const { $auth } = useNuxtApp();
 const router = useRouter();
@@ -21,6 +26,7 @@ async function loginWithFacebook() {
     const user = result.user;
     const token = useCookie("token");
     token.value = await user.getIdToken(true);
+    await startTokenExpirationWatch();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken(true)
     );
@@ -41,10 +47,10 @@ async function loginWithGoogle() {
     const user = result.user;
     const token = useCookie("token");
     token.value = await user.getIdToken(true);
+    await startTokenExpirationWatch();
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken(true)
     );
-    console.log({ hasBeautyProfile });
     if (hasBeautyProfile) {
       router.push("/mes-recettes");
     } else {
@@ -88,6 +94,7 @@ async function createUser() {
         const user = userCredential.user;
         const token = useCookie("token");
         token.value = await user.getIdToken(true);
+        await startTokenExpirationWatch();
         const hasBeautyProfile = await fetchUserBeautyProfile(
           await user.getIdToken(true)
         );
