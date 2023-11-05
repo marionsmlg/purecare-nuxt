@@ -8,7 +8,8 @@ export default defineNuxtConfig({
       storageBucket: `${process.env.NUXT_PROJECT_ID}.appspot.com`,
       messagingSenderId: process.env.NUXT_SENDER_ID,
       appId: process.env.NUXT_APP_ID,
-      measurementId: process.env.NUXT_MEASUREMENT_ID}
+      measurementId: process.env.NUXT_MEASUREMENT_ID,
+      gtagId:process.env.NUXT_MEASUREMENT_ID,}
    
   
   },
