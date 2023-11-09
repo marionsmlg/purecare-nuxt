@@ -7,7 +7,6 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 
-import { apiUrl, deleteData } from "@/utils.js";
 import FacebookIcon from "../components/icons/SocialMedia/facebook.vue";
 import GoogleIcon from "../components/icons/SocialMedia/google.vue";
 import NoIcon from "../components/icons/NoIcon.vue";

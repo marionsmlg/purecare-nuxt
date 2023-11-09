@@ -1,29 +1,28 @@
 <script setup>
-import { ref, markRaw } from 'vue'
+import { ref } from "vue";
 import {
   RadioGroup,
   RadioGroupDescription,
   RadioGroupLabel,
-  RadioGroupOption
-} from '@headlessui/vue'
-import { addIcon, apiUrl } from '@/utils.js'
+  RadioGroupOption,
+} from "@headlessui/vue";
 
-const skinTypes = ref([])
-const selectedSkinType = ref('')
+const skinTypes = ref([]);
+const selectedSkinType = ref("");
 
 async function fetchSkinTypes() {
   try {
-    const queryString = `/api/v1/skin-types`
-    const url = apiUrl + queryString
-    const response = await fetch(url)
-    const data = await response.json()
-    addIcon(data)
-    skinTypes.value = data
+    const queryString = `/api/v1/skin-types`;
+    const url = apiUrl + queryString;
+    const response = await fetch(url);
+    const data = await response.json();
+    addIcon(data);
+    skinTypes.value = data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
-fetchSkinTypes()
+fetchSkinTypes();
 </script>
 
 <template>
@@ -39,13 +38,18 @@ fetchSkinTypes()
       >
         <div
           :class="[
-            checked ? 'border-cyan-500 ring-1 ring-cyan-500' : 'border-gray-300',
-            'relative block cursor-pointer h-24 flex items-center rounded-xl border bg-white px-4 py-2 shadow-sm focus:outline-none sm:flex sm:justify-between'
+            checked
+              ? 'border-cyan-500 ring-1 ring-cyan-500'
+              : 'border-gray-300',
+            'relative block cursor-pointer h-24 flex items-center rounded-xl border bg-white px-4 py-2 shadow-sm focus:outline-none sm:flex sm:justify-between',
           ]"
         >
           <div class="flex items-center">
             <div class="min-w-fit">
-              <component :is="skinType.icon" class="w-16 h-16 md:w-20 md:h-20" />
+              <component
+                :is="skinType.icon"
+                class="w-16 h-16 md:w-20 md:h-20"
+              />
             </div>
             <span class="flex items-center ml-3">
               <span class="flex flex-col text-sm">
@@ -53,7 +57,9 @@ fetchSkinTypes()
                   skinType.name
                 }}</RadioGroupLabel>
                 <RadioGroupDescription as="span" class="text-gray-500">
-                  <span class="block sm:inline">{{ skinType.description }}</span>
+                  <span class="block sm:inline">{{
+                    skinType.description
+                  }}</span>
                 </RadioGroupDescription>
               </span>
             </span>
@@ -63,7 +69,7 @@ fetchSkinTypes()
             :class="[
               active ? 'border' : 'border-transparent',
               checked ? 'border-cyan-500' : 'border-transparent',
-              'pointer-events-none absolute -inset-px rounded-xl'
+              'pointer-events-none absolute -inset-px rounded-xl',
             ]"
             aria-hidden="true"
           />

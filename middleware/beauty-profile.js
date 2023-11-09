@@ -1,5 +1,3 @@
-import { fetchUserBeautyProfile, refreshToken } from "@/utils.js";
-
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const beautyProfile = useCookie("beautyProfile");
   const token = useCookie("token");

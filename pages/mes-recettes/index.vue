@@ -4,15 +4,7 @@ import { ref } from "vue";
 import HairIcon from "@/components/icons/RecipeCategories/IconHair.vue";
 import SkinCareIcon from "@/components/icons/RecipeCategories/SkinCare.vue";
 import DamagedHairIcon from "@/components/icons/RecipeCategories/DamagedHair.vue";
-import recipeIcon from "@/components/icons/Recipe/IconRecipe.vue";
-import {
-  addIcon,
-  pushObjectValueInNewArr,
-  fetchUserBeautyProfile,
-  fetchRecipes,
-  fetchBeautyProfile,
-} from "@/utils.js";
-import Banner from "@/components/Banner.vue";
+import IconRecipe from "@/components/icons/Recipe/IconRecipe.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -86,9 +78,7 @@ async function fetchUserData(userToken) {
   skinTypeId.value = dataUser.physicalTrait[0].skin_type_id;
   hairTypeId.value = dataUser.physicalTrait[0].hair_type_id;
   arrOfHairProblemId.value = pushObjectValueInNewArr(dataUser.hairIssue);
-  const hairProblemCount = countProblems(arrOfHairProblemId.value);
   arrOfSkinProblemId.value = pushObjectValueInNewArr(dataUser.skinIssue);
-  const skinProblemCount = countProblems(arrOfSkinProblemId.value);
 }
 
 const hairIssue = ref("");
@@ -124,34 +114,33 @@ async function getBeautyProfile() {
   hairIssue.value = displayBeautyIssues(data.hairIssue);
 }
 
-async function fetchUserRecipes(userToken) {
-  await fetchUserData(userToken);
-  await Promise.all([getBeautyProfile(), getRecipes()]);
+function getDataInLocalStorage() {
+  if (process.client) {
+    hairTypeId.value = localStorage.getItem("hairType");
+    skinTypeId.value = localStorage.getItem("skinType");
+    const strOfHairProblemId = localStorage.getItem("hairProblem");
+    const strOfSkinProblemId = localStorage.getItem("skinProblem");
+    if (
+      strOfHairProblemId &&
+      strOfSkinProblemId &&
+      skinTypeId.value &&
+      hairTypeId.value
+    ) {
+      arrOfHairProblemId.value = JSON.parse(strOfHairProblemId);
+      arrOfSkinProblemId.value = JSON.parse(strOfSkinProblemId);
+    }
+  }
 }
 
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    await fetchUserRecipes(await user.getIdToken(true));
+    await fetchUserData(await user.getIdToken(true));
   } else {
     isUserLoggedIn.value = false;
-    if (process.client) {
-      hairTypeId.value = localStorage.getItem("hairType");
-      skinTypeId.value = localStorage.getItem("skinType");
-      const strOfHairProblemId = localStorage.getItem("hairProblem");
-      const strOfSkinProblemId = localStorage.getItem("skinProblem");
-      if (
-        strOfHairProblemId &&
-        strOfSkinProblemId &&
-        skinTypeId.value &&
-        hairTypeId.value
-      ) {
-        arrOfHairProblemId.value = JSON.parse(strOfHairProblemId);
-        arrOfSkinProblemId.value = JSON.parse(strOfSkinProblemId);
-        await Promise.all([getBeautyProfile(), getRecipes()]);
-      }
-    }
+    getDataInLocalStorage();
   }
+  await Promise.all([getBeautyProfile(), getRecipes()]);
 });
 
 useSeoMeta({
@@ -212,7 +201,7 @@ definePageMeta({
       </li>
     </ul>
 
-    <Banner v-if="!isUserLoggedIn" />
+    <SubscribeBanner v-if="!isUserLoggedIn" />
     <NuxtLink
       v-else
       to="/mon-profil-beaute"
@@ -226,7 +215,7 @@ definePageMeta({
         <h1 class="text-xl font-semibold lg:text-2xl text-gray-700 pb-3">
           Vos recettes beauté
         </h1>
-        <recipeIcon class="ml-2 w-14" />
+        <IconRecipe class="ml-2 w-14" />
       </div>
 
       <div

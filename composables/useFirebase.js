@@ -6,9 +6,8 @@ import {
   signInWithPopup,
   FacebookAuthProvider,
 } from "firebase/auth";
-import { fetchUserBeautyProfile } from "@/utils.js";
 
-import { useFirebaseUser } from "./useStates";
+const useFirebaseUser = () => useState("firebaseUser", () => {});
 
 export const initUser = async () => {
   const auth = getAuth();
@@ -53,7 +52,6 @@ export async function loginWithGoogle() {
     const hasBeautyProfile = await fetchUserBeautyProfile(
       await user.getIdToken(true)
     );
-    console.log({ hasBeautyProfile });
     if (hasBeautyProfile) {
       router.push("/mes-recettes");
     } else {

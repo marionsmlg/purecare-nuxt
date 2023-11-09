@@ -2,7 +2,6 @@
 import Category from "@/components/Category.vue";
 import { ref, computed } from "vue";
 import BackButton from "@/components/buttons/BackButton.vue";
-import { fetchRecipes } from "@/utils.js";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
@@ -12,6 +11,7 @@ const beautyIssueName = ref();
 
 const recipesByProblem = ref([]);
 
+const PAGE_SIZE = 9;
 let page = 1;
 let limit = 9;
 
@@ -19,7 +19,7 @@ function displayNextRecipes() {
   page++;
 
   if (recipesByProblem.value.length === limit) {
-    limit = 9 * page;
+    limit = PAGE_SIZE * page;
 
     fetchRecipeProblemId();
   }

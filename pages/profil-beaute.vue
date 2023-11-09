@@ -4,7 +4,6 @@ import SkinHairProblems from "../components/beauty-profile/SkinHairProblems.vue"
 import HairTypes from "../components/beauty-profile/HairTypes.vue";
 import BackButton from "../components/buttons/BackButton.vue";
 import { ref, computed } from "vue";
-import { apiUrl, uuidIsValid, postData } from "@/utils.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 const { $auth } = useNuxtApp();
@@ -97,24 +96,6 @@ function quizDataAreUuids() {
   return arePhysicalTraitsIdsValid;
 }
 
-async function quizDataExists() {
-  const queryParams = new URLSearchParams({
-    skin_type_id: selectedOption.value["skinType"],
-    hair_type_id: selectedOption.value["hairType"],
-    skin_issue_id: selectedSkinProblem.value.join(","),
-    hair_issue_id: selectedHairProblem.value.join(","),
-  });
-  try {
-    const queryString = `/api/v1/quiz-data-exists?${queryParams}`;
-    const url = apiUrl + queryString;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("les donnees n existent pas");
-  }
-}
-
 async function setCookieAndRedirect() {
   return new Promise((resolve) => {
     const beautyProfile = useCookie("beautyProfile");
@@ -130,10 +111,24 @@ async function setCookieAndRedirect() {
   });
 }
 
+function setBeautyProfileInLocalStorage() {
+  if (process.client) {
+    localStorage.setItem("skinType", selectedOption.value["skinType"]);
+    localStorage.setItem("hairType", selectedOption.value["hairType"]);
+    localStorage.setItem(
+      "skinProblem",
+      JSON.stringify(selectedSkinProblem.value)
+    );
+    localStorage.setItem(
+      "hairProblem",
+      JSON.stringify(selectedHairProblem.value)
+    );
+  }
+}
+
 async function findRecipes() {
-  const quizDataAreValid = await quizDataExists();
   onAuthStateChanged($auth, async (user) => {
-    if (user && quizDataAreValid && quizDataAreUuids()) {
+    if (user && quizDataAreUuids()) {
       postData(`${apiUrl}/api/v1/users`, {
         skin_type_id: selectedOption.value["skinType"],
         hair_type_id: selectedOption.value["hairType"],
@@ -141,22 +136,8 @@ async function findRecipes() {
         hair_issue_id: selectedHairProblem.value.join(","),
       }).then(() => router.push("/mes-recettes"));
     } else {
-      if (
-        quizDataAreValid &&
-        quizDataAreUuids() &&
-        allQuestionsAnswered &&
-        process.client
-      ) {
-        localStorage.setItem("skinType", selectedOption.value["skinType"]);
-        localStorage.setItem("hairType", selectedOption.value["hairType"]);
-        localStorage.setItem(
-          "skinProblem",
-          JSON.stringify(selectedSkinProblem.value)
-        );
-        localStorage.setItem(
-          "hairProblem",
-          JSON.stringify(selectedHairProblem.value)
-        );
+      if (quizDataAreUuids() && allQuestionsAnswered) {
+        setBeautyProfileInLocalStorage();
         await setCookieAndRedirect();
       } else {
         console.error("Les donnees ne sont pas valides!!!");

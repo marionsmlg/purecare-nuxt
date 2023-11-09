@@ -6,13 +6,12 @@ import {
   InformationCircleIcon,
   ShoppingBagIcon,
 } from "@heroicons/vue/24/outline";
-import HairIcon from "@/components/icons/RecipeCategories/IconHair.vue";
-import SkinIcon from "@/components/icons/RecipeCategories/IconSkin.vue";
+import IconHair from "@/components/icons/RecipeCategories/IconHair.vue";
+import IconSkin from "@/components/icons/RecipeCategories/IconSkin.vue";
 import BackButton from "../components/buttons/BackButton.vue";
 import IconConservation from "../components/icons/Recipe/IconConservation.vue";
 import IconTexture from "../components/icons/Recipe/IconTexture.vue";
 import IconClock from "../components/icons/Recipe/IconClock.vue";
-import { apiUrl } from "@/utils.js";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
@@ -152,7 +151,7 @@ useSeoMeta({
         <div class="flex flex-col items-center">
           <component
             :is="
-              recipe.recipe_category_name === 'Cheveux' ? HairIcon : SkinIcon
+              recipe.recipe_category_name === 'Cheveux' ? IconHair : IconSkin
             "
             class="w-8"
           ></component>

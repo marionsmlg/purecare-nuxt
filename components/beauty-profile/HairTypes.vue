@@ -1,31 +1,29 @@
 <script setup>
-import { ref, markRaw } from 'vue'
+import { ref } from "vue";
 import {
   RadioGroup,
   RadioGroupDescription,
   RadioGroupLabel,
-  RadioGroupOption
-} from '@headlessui/vue'
+  RadioGroupOption,
+} from "@headlessui/vue";
 
-import { addIcon, apiUrl } from '@/utils.js'
-
-const hairTypes = ref([])
-const selectedHairType = ref('')
+const hairTypes = ref([]);
+const selectedHairType = ref("");
 
 async function fetchHairTypes() {
   try {
-    const queryString = `/api/v1/hair-types`
-    const url = apiUrl + queryString
-    const response = await fetch(url)
-    const data = await response.json()
-    addIcon(data)
-    hairTypes.value = data
+    const queryString = `/api/v1/hair-types`;
+    const url = apiUrl + queryString;
+    const response = await fetch(url);
+    const data = await response.json();
+    addIcon(data);
+    hairTypes.value = data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
-fetchHairTypes()
+fetchHairTypes();
 </script>
 
 <template>
@@ -41,8 +39,10 @@ fetchHairTypes()
       >
         <div
           :class="[
-            checked ? 'border-cyan-500 ring-1 ring-cyan-500' : 'border-gray-300',
-            'relative block cursor-pointer rounded-xl border bg-white px-6 py-4 shadow-sm focus:outline-none w-40 md:w-56'
+            checked
+              ? 'border-cyan-500 ring-1 ring-cyan-500'
+              : 'border-gray-300',
+            'relative block cursor-pointer rounded-xl border bg-white px-6 py-4 shadow-sm focus:outline-none w-40 md:w-56',
           ]"
         >
           <div class="flex flex-col items-center">
@@ -59,7 +59,7 @@ fetchHairTypes()
             :class="[
               active ? 'border' : 'border-1',
               checked ? 'border-cyan-500' : 'border-transparent',
-              'pointer-events-none absolute -inset-px rounded-xl'
+              'pointer-events-none absolute -inset-px rounded-xl',
             ]"
             aria-hidden="true"
           />

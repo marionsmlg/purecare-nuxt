@@ -7,7 +7,6 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { ref, computed } from "vue";
-import { fetchUserBeautyProfile } from "@/utils.js";
 import FacebookIcon from "@/components/icons/SocialMedia/facebook.vue";
 import GoogleIcon from "@/components/icons/SocialMedia/google.vue";
 

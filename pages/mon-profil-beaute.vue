@@ -4,7 +4,6 @@ import SkinHairProblems from "../components/beauty-profile/SkinHairProblems.vue"
 import HairTypes from "../components/beauty-profile/HairTypes.vue";
 import BackButton from "../components/buttons/BackButton.vue";
 import { ref, computed } from "vue";
-import { apiUrl, updateData, fetchUserBeautyProfile } from "@/utils.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 const { $auth } = useNuxtApp();
@@ -74,28 +73,9 @@ function updateCheckboxes({ instance, values }) {
 
 const router = useRouter();
 
-async function quizDataExists() {
-  const queryParams = new URLSearchParams({
-    skin_type_id: selectedSkinType.value,
-    hair_type_id: selectedHairType.value,
-    skin_issue_id: selectedSkinProblem.value.join(","),
-    hair_issue_id: selectedHairProblem.value.join(","),
-  });
-  try {
-    const queryString = `/api/v1/quiz-data-exists?${queryParams}`;
-    const url = apiUrl + queryString;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("les donnees n existent pas");
-  }
-}
-
 async function findRecipes() {
-  const quizDataAreValid = await quizDataExists();
   onAuthStateChanged($auth, async (user) => {
-    if (user && quizDataAreValid) {
+    if (user) {
       await updateData(`${apiUrl}/api/v1/users`, {
         skin_type_id: selectedSkinType.value,
         hair_type_id: selectedHairType.value,

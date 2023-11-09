@@ -13,7 +13,6 @@ import ListBox from "../components/buttons/ListBox.vue";
 import IconPeople from "../components/icons/IconPeople.vue";
 import IconMolecule from "../components/icons/IconMolecule.vue";
 import { onAuthStateChanged } from "firebase/auth";
-import { apiUrl } from "@/utils.js";
 import { ref, computed } from "vue";
 
 const { $auth } = useNuxtApp();

@@ -3,11 +3,6 @@ import Category from "@/components/Category.vue";
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import BackButton from "@/components/buttons/BackButton.vue";
-import {
-  pushObjectValueInNewArr,
-  fetchUserBeautyProfile,
-  fetchRecipes,
-} from "@/utils.js";
 import { onAuthStateChanged } from "firebase/auth";
 
 const route = useRoute();
@@ -24,17 +19,18 @@ const arrOfHairProblemId = ref();
 
 let page = 1;
 let limit = 9;
+const PAGE_SIZE = 9;
 
 function displayNextRecipes() {
   page++;
   if (recipeCategoryName === "cheveux") {
     if (hairRecipes.value.length === limit) {
-      limit = 9 * page;
+      limit = PAGE_SIZE * page;
       getRecipes();
     }
   } else {
     if (skinRecipes.value.length === limit) {
-      limit = 9 * page;
+      limit = PAGE_SIZE * page;
     }
     getRecipes();
   }
@@ -72,29 +68,28 @@ async function getRecipes() {
   hairRecipes.value = dataRecipes.hairRecipe;
 }
 
-async function fetchUserRecipes(userToken) {
-  await fetchUserData(userToken);
-  await getRecipes();
+function getDataInLocalStorage() {
+  if (process.client) {
+    hairTypeId.value = localStorage.getItem("hairType") || "";
+    skinTypeId.value = localStorage.getItem("skinType") || "";
+    arrOfHairProblemId.value = JSON.parse(
+      localStorage.getItem("hairProblem") || ""
+    );
+    arrOfSkinProblemId.value = JSON.parse(
+      localStorage.getItem("skinProblem") || ""
+    );
+  }
 }
 
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    fetchUserRecipes(await user.getIdToken(true));
+    await fetchUserData(await user.getIdToken(true));
   } else {
     isUserLoggedIn.value = false;
-    if (process.client) {
-      hairTypeId.value = localStorage.getItem("hairType") || "";
-      skinTypeId.value = localStorage.getItem("skinType") || "";
-      arrOfHairProblemId.value = JSON.parse(
-        localStorage.getItem("hairProblem") || ""
-      );
-      arrOfSkinProblemId.value = JSON.parse(
-        localStorage.getItem("skinProblem") || ""
-      );
-      getRecipes();
-    }
+    getDataInLocalStorage();
   }
+  await getRecipes();
 });
 
 useSeoMeta({
