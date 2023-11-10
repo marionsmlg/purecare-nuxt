@@ -218,6 +218,7 @@ definePageMeta({
         <IconRecipe class="ml-2 w-14" />
       </div>
 
+      <!-- SOINS CHEVEUX -->
       <div
         class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0"
       >
@@ -302,7 +303,7 @@ definePageMeta({
       </div>
     </div>
 
-    <!-- ////////////////////////////////// -->
+    <!-- SOINS VISAGE-->
 
     <div
       class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0"

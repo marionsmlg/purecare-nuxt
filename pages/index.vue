@@ -2,7 +2,7 @@
 import CompositionCosmetics from "../components/landing-page/CompositionCosmetics.vue";
 import UniqueProducts from "../components/landing-page/UniqueProducts.vue";
 import SaveMoney from "../components/landing-page/SaveMoney.vue";
-import MainSvg from "../components/landing-page/FemmeQuiSinterroge.vue";
+import WomanWondering from "../components/landing-page/WomanWondering.vue";
 import Products from "../components/landing-page/Products.vue";
 import {
   CursorArrowRaysIcon,
@@ -161,7 +161,7 @@ useSeoMeta({
           </div>
         </div>
         <div class="mb-4 md:rounded-lg overflow-hidden">
-          <MainSvg />
+          <WomanWondering />
         </div>
 
         <div class="lg:hidden flex justify-center p-2">

@@ -29,7 +29,7 @@ async function loginWithFacebook() {
       router.push("/profil-beaute");
     }
   } catch (error) {
-    // Gérez les erreurs ici
+    console.error(error);
   }
 }
 
@@ -49,7 +49,7 @@ async function loginWithGoogle() {
       router.push("/profil-beaute");
     }
   } catch (error) {
-    // Gérez les erreurs ici
+    console.error(error);
   }
 }
 
