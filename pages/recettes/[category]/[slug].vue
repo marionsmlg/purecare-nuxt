@@ -6,12 +6,12 @@ import {
   InformationCircleIcon,
   ShoppingBagIcon,
 } from "@heroicons/vue/24/outline";
-import IconHair from "@/components/icons/RecipeCategories/IconHair.vue";
-import IconSkin from "@/components/icons/RecipeCategories/IconSkin.vue";
+import IconHair from "@/components/icons/recipe-categories/IconHair.vue";
+import IconSkin from "@/components/icons/recipe-categories/IconSkin.vue";
 import BackButton from "../components/buttons/BackButton.vue";
-import IconConservation from "../components/icons/Recipe/IconConservation.vue";
-import IconTexture from "../components/icons/Recipe/IconTexture.vue";
-import IconClock from "../components/icons/Recipe/IconClock.vue";
+import IconConservation from "../components/icons/recipe/IconConservation.vue";
+import IconTexture from "../components/icons/recipe/IconTexture.vue";
+import IconClock from "../components/icons/recipe/IconClock.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 

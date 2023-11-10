@@ -7,8 +7,8 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 
-import FacebookIcon from "../components/icons/SocialMedia/facebook.vue";
-import GoogleIcon from "../components/icons/SocialMedia/google.vue";
+import FacebookIcon from "../components/icons/social-media/facebook.vue";
+import GoogleIcon from "../components/icons/social-media/google.vue";
 import NoIcon from "../components/icons/NoIcon.vue";
 
 const router = useRouter();

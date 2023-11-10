@@ -1,11 +1,11 @@
-import IconOilySkin from "@/components/icons/SkinTypes/IconOilySkin.vue";
-import IconDrySkin from "@/components/icons/SkinTypes/IconDrySkin.vue";
-import IconNormalSkin from "@/components/icons/SkinTypes/IconNormalSkin.vue";
-import IconMixedSkin from "@/components/icons/SkinTypes/IconMixedSkin.vue";
-import IconSmoothHair from "@/components/icons/HairTypes/IconSmoothHair.vue";
-import IconFrizzyHair from "@/components/icons/HairTypes/IconFrizzyHair.vue";
-import IconWavyHair from "@/components/icons/HairTypes/IconWavyHair.vue";
-import IconCurlyHair from "@/components/icons/HairTypes/IconCurlyHair.vue";
+import IconOilySkin from "@/components/icons/skin-types/IconOilySkin.vue";
+import IconDrySkin from "@/components/icons/skin-types/IconDrySkin.vue";
+import IconNormalSkin from "@/components/icons/skin-types/IconNormalSkin.vue";
+import IconMixedSkin from "@/components/icons/skin-types/IconMixedSkin.vue";
+import IconSmoothHair from "@/components/icons/hair-types/IconSmoothHair.vue";
+import IconFrizzyHair from "@/components/icons/hair-types/IconFrizzyHair.vue";
+import IconWavyHair from "@/components/icons/hair-types/IconWavyHair.vue";
+import IconCurlyHair from "@/components/icons/hair-types/IconCurlyHair.vue";
 import { markRaw } from "vue";
 
 export function addIcon(objectWithoutIcon) {

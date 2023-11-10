@@ -1,10 +1,10 @@
 <script setup>
 import { ClockIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
-import HairIcon from "@/components/icons/RecipeCategories/IconHair.vue";
-import SkinCareIcon from "@/components/icons/RecipeCategories/SkinCare.vue";
-import DamagedHairIcon from "@/components/icons/RecipeCategories/DamagedHair.vue";
-import IconRecipe from "@/components/icons/Recipe/IconRecipe.vue";
+import HairIcon from "@/components/icons/recipe-categories/IconHair.vue";
+import SkinCareIcon from "@/components/icons/recipe-categories/SkinCare.vue";
+import DamagedHairIcon from "@/components/icons/recipe-categories/DamagedHair.vue";
+import IconRecipe from "@/components/icons/recipe/IconRecipe.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
 import { onAuthStateChanged } from "firebase/auth";
 import { fetchUserBeautyProfile } from "@/utils.js";
