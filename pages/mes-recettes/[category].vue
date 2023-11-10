@@ -90,8 +90,15 @@ onAuthStateChanged($auth, async (user) => {
     isUserLoggedIn.value = false;
     getDataInLocalStorage();
   }
-
-  await getRecipes();
+  const dataAvailable = Boolean(
+    skinTypeId.value &&
+      hairTypeId.value &&
+      arrOfHairProblemId.value &&
+      arrOfSkinProblemId.value
+  );
+  if (dataAvailable) {
+    await getRecipes();
+  }
 });
 
 useSeoMeta({
