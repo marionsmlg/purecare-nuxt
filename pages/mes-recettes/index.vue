@@ -131,12 +131,15 @@ function getDataInLocalStorage() {
     }
   }
 }
+async function fetchUserRecipe(userToken) {
+  await fetchUserData(userToken);
+  await Promise.all([getBeautyProfile(), getRecipes()]);
+}
 
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    await fetchUserData(await user.getIdToken(true));
-    await Promise.all([getBeautyProfile(), getRecipes()]);
+    fetchUserRecipe(await user.getIdToken());
   } else {
     isUserLoggedIn.value = false;
     getDataInLocalStorage();
