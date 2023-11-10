@@ -147,6 +147,7 @@ onAuthStateChanged($auth, async (user) => {
       arrOfHairProblemId.value &&
       arrOfSkinProblemId.value
   );
+  console.log(dataAvailable);
   if (dataAvailable) {
     await Promise.all([getBeautyProfile(), getRecipes()]);
   }
@@ -167,9 +168,9 @@ useSeoMeta({
   twitterImage: "/purecare-logo.jpg",
 });
 
-definePageMeta({
-  middleware: "beauty-profile",
-});
+// definePageMeta({
+//   middleware: "beauty-profile",
+// });
 </script>
 
 <template>
