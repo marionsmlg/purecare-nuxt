@@ -139,7 +139,7 @@ async function fetchUserRecipe(userToken) {
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    fetchUserRecipe(await user.getIdToken());
+    await fetchUserRecipe(await user.getIdToken());
   } else {
     isUserLoggedIn.value = false;
     getDataInLocalStorage();
