@@ -81,13 +81,6 @@ function getDataInLocalStorage() {
   }
 }
 
-const dataAvailable = Boolean(
-  hairTypeId.value &&
-    skinTypeId.value &&
-    arrOfHairProblemId.value &&
-    arrOfSkinProblemId.value
-);
-console.log(dataAvailable);
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
@@ -96,9 +89,8 @@ onAuthStateChanged($auth, async (user) => {
     isUserLoggedIn.value = false;
     getDataInLocalStorage();
   }
-  if (dataAvailable) {
-    await getRecipes();
-  }
+
+  await getRecipes();
 });
 
 useSeoMeta({
