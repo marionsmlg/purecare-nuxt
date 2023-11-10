@@ -114,7 +114,7 @@ async function getBeautyProfile() {
   hairIssue.value = displayBeautyIssues(data.hairIssue);
 }
 
-async function getDataInLocalStorage() {
+function getDataInLocalStorage() {
   if (process.client) {
     hairTypeId.value = localStorage.getItem("hairType");
     skinTypeId.value = localStorage.getItem("skinType");
@@ -132,20 +132,21 @@ async function getDataInLocalStorage() {
   }
 }
 
-const dataAvailable = ref(false);
-
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
-    await fetchUserData(await user.getIdToken(true)).then(
-      () => (dataAvailable.value = true)
-    );
+    await fetchUserData(await user.getIdToken(true));
   } else {
     isUserLoggedIn.value = false;
     console.log("not user");
-    await getDataInLocalStorage().then(() => (dataAvailable.value = true));
+    getDataInLocalStorage();
   }
-
+  const dataAvailable = Boolean(
+    skinTypeId.value &&
+      hairTypeId.value &&
+      arrOfHairProblemId.value &&
+      arrOfSkinProblemId.value
+  );
   if (dataAvailable) {
     await Promise.all([getBeautyProfile(), getRecipes()]);
   }
