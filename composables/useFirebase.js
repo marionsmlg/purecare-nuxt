@@ -6,7 +6,7 @@ import {
   signInWithPopup,
   FacebookAuthProvider,
 } from "firebase/auth";
-
+import { fetchUserBeautyProfile } from "@/utils.js";
 const useFirebaseUser = () => useState("firebaseUser", () => {});
 
 export const initUser = async () => {

@@ -4,6 +4,7 @@ import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import BackButton from "@/components/buttons/BackButton.vue";
 import { onAuthStateChanged } from "firebase/auth";
+import { fetchUserBeautyProfile } from "@/utils.js";
 
 const route = useRoute();
 const recipeCategoryName = route.params.category;

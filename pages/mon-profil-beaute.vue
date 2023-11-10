@@ -5,7 +5,7 @@ import HairTypes from "../components/beauty-profile/HairTypes.vue";
 import BackButton from "../components/buttons/BackButton.vue";
 import { ref, computed } from "vue";
 import { onAuthStateChanged } from "firebase/auth";
-
+import { fetchUserBeautyProfile } from "@/utils.js";
 const { $auth } = useNuxtApp();
 
 const skinProblems = ref([]);

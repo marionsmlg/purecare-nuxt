@@ -7,6 +7,7 @@ import DamagedHairIcon from "@/components/icons/RecipeCategories/DamagedHair.vue
 import IconRecipe from "@/components/icons/Recipe/IconRecipe.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
 import { onAuthStateChanged } from "firebase/auth";
+import { fetchUserBeautyProfile } from "@/utils.js";
 
 const { $auth } = useNuxtApp();
 
@@ -168,9 +169,9 @@ useSeoMeta({
   twitterImage: "/purecare-logo.jpg",
 });
 
-// definePageMeta({
-//   middleware: "beauty-profile",
-// });
+definePageMeta({
+  middleware: "beauty-profile",
+});
 </script>
 
 <template>
