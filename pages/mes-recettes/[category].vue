@@ -85,11 +85,12 @@ onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
     await fetchUserData(await user.getIdToken(true));
+    await getRecipes();
   } else {
     isUserLoggedIn.value = false;
     getDataInLocalStorage();
+    await getRecipes();
   }
-  await getRecipes();
 });
 
 useSeoMeta({
