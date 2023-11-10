@@ -1,5 +1,4 @@
 import { fetchUserBeautyProfile, refreshToken } from "@/utils.js";
-import { onAuthStateChanged } from "firebase/auth";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const beautyProfile = useCookie("beautyProfile");

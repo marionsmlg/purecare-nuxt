@@ -139,7 +139,6 @@ onAuthStateChanged($auth, async (user) => {
     await fetchUserData(await user.getIdToken(true));
   } else {
     isUserLoggedIn.value = false;
-    console.log("not user");
     getDataInLocalStorage();
   }
   const dataAvailable = Boolean(
@@ -148,7 +147,7 @@ onAuthStateChanged($auth, async (user) => {
       arrOfHairProblemId.value &&
       arrOfSkinProblemId.value
   );
-  console.log(dataAvailable);
+
   if (dataAvailable) {
     await Promise.all([getBeautyProfile(), getRecipes()]);
   }
