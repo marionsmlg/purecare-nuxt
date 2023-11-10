@@ -81,14 +81,22 @@ function getDataInLocalStorage() {
   }
 }
 
+const dataAvailable = Boolean(
+  hairTypeId.value &&
+    skinTypeId.value &&
+    arrOfHairProblemId.value &&
+    arrOfSkinProblemId.value
+);
+console.log(dataAvailable);
 onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
     await fetchUserData(await user.getIdToken(true));
-    await getRecipes();
   } else {
     isUserLoggedIn.value = false;
     getDataInLocalStorage();
+  }
+  if (dataAvailable) {
     await getRecipes();
   }
 });
