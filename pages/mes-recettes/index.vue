@@ -143,7 +143,7 @@ onAuthStateChanged($auth, async (user) => {
   } else {
     isUserLoggedIn.value = false;
     console.log("not user");
-    // await getDataInLocalStorage().then(() => (dataAvailable.value = true));
+    await getDataInLocalStorage().then(() => (dataAvailable.value = true));
   }
 
   if (dataAvailable) {
@@ -166,9 +166,9 @@ useSeoMeta({
   twitterImage: "/purecare-logo.jpg",
 });
 
-definePageMeta({
-  middleware: "beauty-profile",
-});
+// definePageMeta({
+//   middleware: "beauty-profile",
+// });
 </script>
 
 <template>
