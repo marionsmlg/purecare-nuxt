@@ -138,13 +138,15 @@ onAuthStateChanged($auth, async (user) => {
   if (user) {
     isUserLoggedIn.value = true;
     await fetchUserData(await user.getIdToken(true)).then(
-      async () => await Promise.all([getBeautyProfile(), getRecipes()])
+      () => (dataAvailable.value = true)
     );
   } else {
     isUserLoggedIn.value = false;
-    await getDataInLocalStorage().then(
-      async () => await Promise.all([getBeautyProfile(), getRecipes()])
-    );
+    await getDataInLocalStorage().then(() => (dataAvailable.value = true));
+  }
+
+  if (dataAvailable) {
+    await Promise.all([getBeautyProfile(), getRecipes()]);
   }
 });
 
