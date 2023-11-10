@@ -54,7 +54,7 @@ function signOutUser() {
 <template>
   <nav>
     <div class="flex justify-between items-center px-7 py-4 shadow-md">
-      <div class="w-40 md:w-56">
+      <div class="w-40 md:w-44">
         <NuxtLink to="/"><PurecareLogo /></NuxtLink>
       </div>
 
