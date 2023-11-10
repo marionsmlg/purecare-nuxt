@@ -142,7 +142,8 @@ onAuthStateChanged($auth, async (user) => {
     );
   } else {
     isUserLoggedIn.value = false;
-    await getDataInLocalStorage().then(() => (dataAvailable.value = true));
+    console.log("not user");
+    // await getDataInLocalStorage().then(() => (dataAvailable.value = true));
   }
 
   if (dataAvailable) {
