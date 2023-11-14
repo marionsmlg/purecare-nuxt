@@ -7,7 +7,6 @@ import DamagedHairIcon from "@/components/icons/recipe-categories/DamagedHair.vu
 import IconRecipe from "@/components/icons/recipe/IconRecipe.vue";
 import BackButton from "@/components/buttons/BackButton.vue";
 import { onAuthStateChanged } from "firebase/auth";
-import { fetchUserBeautyProfile } from "@/utils.js";
 
 const { $auth } = useNuxtApp();
 

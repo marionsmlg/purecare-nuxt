@@ -9,7 +9,6 @@ import {
 import { ref } from "vue";
 import FacebookIcon from "@/components/icons/social-media/facebook.vue";
 import GoogleIcon from "@/components/icons/social-media/google.vue";
-import { fetchUserBeautyProfile } from "@/utils.js";
 
 const { $auth } = useNuxtApp();
 const router = useRouter();
