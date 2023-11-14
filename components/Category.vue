@@ -38,7 +38,11 @@ const props = defineProps({
               {{ recipe.recipe_category_name }}
             </span> -->
 
-            <img :src="recipe.img_url" class="w-full h-auto object-cover" />
+            <img
+              :src="recipe.img_url"
+              :alt="recipe.title"
+              class="w-full h-auto object-cover"
+            />
 
             <div
               class="absolute right-0 left-0 bottom-4 px-4 mx-auto sm:px-2 lg:px-4 sm:bottom-2 lg:bottom-4"
