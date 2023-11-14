@@ -134,6 +134,8 @@ const navigation = {
           <div>
             <MenuButton
               aria-label="user"
+              id="user"
+              title="user"
               class="inline-flex w-full justify-center rounded-md text-sm font-medium text-gray-700 hover:text-gray-500"
             >
               <UserIcon class="w-5" />

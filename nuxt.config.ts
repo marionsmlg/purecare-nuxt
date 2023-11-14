@@ -24,6 +24,9 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
+      htmlAttrs: {
+        lang: "en",
+      },
       link: [
         {
           rel: "preconnect",
