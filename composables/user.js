@@ -73,7 +73,6 @@ export async function refreshToken() {
       const newToken = await user.getIdToken(true);
       const token = useCookie("token");
       token.value = newToken;
-      console.log("token refreshed!");
     }
   });
 }

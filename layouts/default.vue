@@ -119,7 +119,7 @@ const navigation = {
   <nav>
     <div class="flex justify-between items-center px-7 py-4 shadow-md">
       <div class="w-40 md:w-44">
-        <NuxtLink to="/"><PurecareLogo /></NuxtLink>
+        <NuxtLink to="/" aria-label="Home"><PurecareLogo /></NuxtLink>
       </div>
 
       <!-- <div class="hidden lg:flex md:text-left text-gray-700">
@@ -133,6 +133,7 @@ const navigation = {
         <Menu as="div" class="relative inline-block text-left">
           <div>
             <MenuButton
+              aria-label="user"
               class="inline-flex w-full justify-center rounded-md text-sm font-medium text-gray-700 hover:text-gray-500"
             >
               <UserIcon class="w-5" />
