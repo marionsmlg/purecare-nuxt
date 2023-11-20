@@ -141,7 +141,7 @@ useSeoMeta({
   <div class="xl:max-w-7xl 2xl:m-auto md:m-6">
     <section class="my-4 mt-12">
       <div class="text-center flex flex-col">
-        <div class="px-6 lg:absolute lg:w-1/2">
+        <div class="px-6">
           <h1
             class="text-[#605E5E] text-xl font-medium mb-3 md:text-2xl lg:text-4xl"
           >
@@ -152,19 +152,19 @@ useSeoMeta({
             PureCare sélectionne des recettes de cosmétiques DIY qui vous
             ressemblent !
           </h2>
-          <div class="hidden lg:flex justify-center">
+          <!-- <div class="hidden lg:flex justify-center">
             <NuxtLink :to="mainButtonRoute"
               ><ButtonPrimary
                 >Découvrez vos recettes sur mesure
                 <ArrowLongRightIcon class="w-4 h-4 ml-2" /></ButtonPrimary
             ></NuxtLink>
-          </div>
+          </div> -->
         </div>
-        <div class="mb-4 md:rounded-lg overflow-hidden">
-          <WomanWondering />
+        <div class="mb-4 flex justify-center">
+          <WomanWondering class="md:rounded-lg max-w-5xl" />
         </div>
 
-        <div class="lg:hidden flex justify-center p-2">
+        <div class="flex justify-center p-2">
           <NuxtLink :to="mainButtonRoute"
             ><ButtonPrimary
               >Découvrez vos recettes sur mesure

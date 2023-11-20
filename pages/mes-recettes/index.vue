@@ -169,6 +169,9 @@ useSeoMeta({
 
 definePageMeta({
   middleware: "beauty-profile",
+  // pageTransition: {
+  //   name: "slide-right",
+  // },
 });
 </script>
 
