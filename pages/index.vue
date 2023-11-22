@@ -93,9 +93,8 @@ useSeoMeta({
             ></NuxtLink>
           </div> -->
         </div>
-        <div class="mb-4 w-full">
-          <WomanWondering class="max-w-5xl md:rounded-md" />
-        </div>
+
+        <WomanWondering class="max-w-5xl md:rounded-md mb-4" />
 
         <div class="flex justify-center p-2">
           <NuxtLink :to="mainButtonRoute"
