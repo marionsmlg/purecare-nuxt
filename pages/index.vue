@@ -94,7 +94,7 @@ useSeoMeta({
           </div> -->
         </div>
         <div class="mb-4 flex justify-center">
-          <WomanWondering class="md:rounded-lg max-w-5xl h-auto" />
+          <WomanWondering class="md:rounded-lg" />
         </div>
 
         <div class="flex justify-center p-2">
