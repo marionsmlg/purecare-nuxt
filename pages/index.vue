@@ -73,7 +73,7 @@ useSeoMeta({
 <template>
   <div class="xl:max-w-7xl 2xl:m-auto md:m-6">
     <section class="my-4 mt-12">
-      <div class="text-center flex flex-col">
+      <div class="text-center flex flex-col items-center">
         <div class="px-6">
           <h1
             class="text-[#605E5E] text-xl font-medium mb-3 md:text-2xl lg:text-4xl"
@@ -93,8 +93,8 @@ useSeoMeta({
             ></NuxtLink>
           </div> -->
         </div>
-        <div class="mb-4">
-          <WomanWondering class="" />
+        <div class="mb-4 flex justify-center w-full">
+          <WomanWondering class="max-w-5xl md:rounded-md" />
         </div>
 
         <div class="flex justify-center p-2">
