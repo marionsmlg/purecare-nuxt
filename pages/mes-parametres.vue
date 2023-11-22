@@ -169,9 +169,9 @@ definePageMeta({
           <h2 class="text-base font-semibold leading-7">
             Informations personelles
           </h2>
-          <p class="mt-1 text-sm leading-6 text-gray-400">
+          <!-- <p class="mt-1 text-sm leading-6 text-gray-400">
             Utilisez une adresse permanente où vous pouvez recevoir un e-mail.
-          </p>
+          </p> -->
         </div>
 
         <form class="md:col-span-2" @submit.prevent="verifyEmail">
@@ -189,20 +189,21 @@ definePageMeta({
                   name="email"
                   type="email"
                   autocomplete="email"
+                  disabled
                   class="block w-full rounded-md border border-1 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
           </div>
 
-          <div class="mt-8 flex">
+          <!-- <div class="mt-8 flex">
             <button
               type="submit"
               class="rounded-xl bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
               Sauvegarder
             </button>
-          </div>
+          </div> -->
         </form>
       </div>
 

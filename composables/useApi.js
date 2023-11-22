@@ -3,7 +3,7 @@ export const apiUrl =
     ? "https://purecare-api-production.up.railway.app"
     : "http://localhost:3000";
 
-// export const apiUrl = 'http://localhost:3000'
+// export const apiUrl = "http://localhost:3003";
 
 export async function fetchRecipes(queryParams) {
   try {
