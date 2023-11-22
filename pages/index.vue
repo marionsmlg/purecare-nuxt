@@ -93,7 +93,7 @@ useSeoMeta({
             ></NuxtLink>
           </div> -->
         </div>
-        <div class="mb-4 flex justify-center">
+        <div class="mb-4">
           <WomanWondering class="" />
         </div>
 
