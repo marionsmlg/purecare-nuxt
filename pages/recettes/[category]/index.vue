@@ -64,7 +64,7 @@ useSeoMeta({
     <BackButton />
   </div>
   <Category
-    :categoryName="category"
+    :categoryName="`Soins ${category}`"
     :recipes="recipesByProblem"
     :beautyIssue="beautyIssueName"
   />

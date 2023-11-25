@@ -128,7 +128,7 @@ definePageMeta({
   </div>
   <Category
     :recipes="recipeCategoryName === 'cheveux' ? hairRecipes : skinRecipes"
-    :categoryName="recipeCategoryName"
+    :categoryName="`Soins ${recipeCategoryName}`"
   />
   <div class="flex justify-center" v-if="canDisplayMoreRecipes">
     <button

@@ -7,6 +7,7 @@ import {
   PencilSquareIcon,
   CogIcon,
   EnvelopeIcon,
+  HeartIcon,
 } from "@heroicons/vue/24/outline";
 
 import PurecareLogo from "@/components/PurecareLogo.vue";
@@ -169,6 +170,23 @@ const navigation = {
                       aria-hidden="true"
                     />
                     Mes recettes
+                  </NuxtLink>
+                </MenuItem>
+                <MenuItem v-slot="{ active, close }" as="div">
+                  <NuxtLink
+                    @click="close"
+                    to="/mes-recettes-favorites"
+                    :class="[
+                      active ? 'bg-[#C7E8F1]' : 'text-gray-900',
+                      'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                    ]"
+                  >
+                    <HeartIcon
+                      :active="active"
+                      class="mr-2 h-5 w-5 text-[#0C8294]"
+                      aria-hidden="true"
+                    />
+                    Mes favoris
                   </NuxtLink>
                 </MenuItem>
                 <MenuItem v-slot="{ active, close }" as="div">

@@ -14,6 +14,18 @@ import IconTexture from "../components/icons/recipe/IconTexture.vue";
 import IconClock from "../components/icons/recipe/IconClock.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import { onAuthStateChanged } from "firebase/auth";
+
+const { $auth } = useNuxtApp();
+const isUserLoggedIn = ref(false);
+
+onAuthStateChanged($auth, async (user) => {
+  if (user) {
+    isUserLoggedIn.value = true;
+  } else {
+    isUserLoggedIn.value = false;
+  }
+});
 
 const route = useRoute();
 const recipeSlug = route.params.slug;
@@ -76,8 +88,9 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     console.error(error);
   }
 }
-
-fetchDataRecipeBySlug(recipeSlug);
+onMounted(async () => {
+  await fetchDataRecipeBySlug(recipeSlug);
+});
 
 useSeoMeta({
   title: () => recipe.value.title,
@@ -98,9 +111,12 @@ useSeoMeta({
     <BackButton />
   </div>
   <div class="px-4 pt-6 flex flex-col items-center">
-    <h1 class="text-2xl font-bold text-center mb-8 text-gray-900">
-      {{ recipe.title }}
-    </h1>
+    <div class="flex flex-col items-center md:items-start md:flex-row mb-8">
+      <h1 class="text-2xl font-bold text-center text-gray-900 mr-3 mb-2">
+        {{ recipe.title }}
+      </h1>
+      <likeRecipe :recipeId="recipe.id" v-if="isUserLoggedIn" />
+    </div>
 
     <div class="flex flex-wrap justify-center gap-x-6 gap-y-4 mb-8">
       <span

@@ -11,7 +11,7 @@ const props = defineProps({
 <template>
   <div class="p-4 flex flex-col items-center">
     <h1 class="text-2xl font-bold text-center mb-8 text-gray-900">
-      Soins {{ props.categoryName }}
+      {{ props.categoryName }}
     </h1>
     <div
       class="flex space-x-3 mb-8"
@@ -28,7 +28,9 @@ const props = defineProps({
       class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 px-4 lg:w-3/5"
     >
       <div v-for="recipe in props.recipes" class="mb-4 w-full hover:opacity-75">
-        <NuxtLink :to="`/recettes/${props.categoryName}/${recipe.slug}`">
+        <NuxtLink
+          :to="`/recettes/${recipe.recipe_category_slug}/${recipe.slug}`"
+        >
           <div
             class="relative flex w-full h-96 overflow-hidden lg:mb-8 rounded-xl"
           >
