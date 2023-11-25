@@ -129,8 +129,8 @@ export async function deleteFavoriteRecipe(url, recipeId) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-          body: JSON.stringify({ recipe_id: recipeId }),
         },
+        body: JSON.stringify({ recipe_id: recipeId }),
       });
     } else {
       console.error("L'utilisateur n'est pas connecté.");

@@ -39,7 +39,7 @@ const toggleLike = async () => {
       });
     } else {
       await deleteFavoriteRecipe(
-        `${apiUrl}/api/v1/user-favorite-recipe?recipe_id=${props.recipeId}`,
+        `${apiUrl}/api/v1/user-favorite-recipe`,
         props.recipeId
       );
     }
