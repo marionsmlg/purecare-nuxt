@@ -118,7 +118,7 @@ export async function addFavoriteRecipe(url, data) {
   }
 }
 
-export async function deleteFavoriteRecipe(url) {
+export async function deleteFavoriteRecipe(url, recipeId) {
   const { $auth } = useNuxtApp();
   const user = $auth.currentUser;
   try {
@@ -129,6 +129,7 @@ export async function deleteFavoriteRecipe(url) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          body: JSON.stringify({ recipe_id: recipeId }),
         },
       });
     } else {
