@@ -8,13 +8,13 @@ import {
 } from "@heroicons/vue/24/outline";
 import IconHair from "@/components/icons/recipe-categories/IconHair.vue";
 import IconSkin from "@/components/icons/recipe-categories/IconSkin.vue";
-import BackButton from "../components/buttons/BackButton.vue";
 import IconConservation from "../components/icons/recipe/IconConservation.vue";
 import IconTexture from "../components/icons/recipe/IconTexture.vue";
 import IconClock from "../components/icons/recipe/IconClock.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { onAuthStateChanged } from "firebase/auth";
+import BackToPreviousRoute from "../../../components/buttons/BackToPreviousRoute.vue";
 
 const { $auth } = useNuxtApp();
 const isUserLoggedIn = ref(false);
@@ -108,7 +108,7 @@ useSeoMeta({
 
 <template>
   <div class="flex flex-col lg:px-32 px-4 py-8">
-    <BackButton />
+    <BackToPreviousRoute />
   </div>
   <div class="px-4 pt-6 flex flex-col items-center">
     <div class="flex flex-col items-center md:items-start md:flex-row mb-8">

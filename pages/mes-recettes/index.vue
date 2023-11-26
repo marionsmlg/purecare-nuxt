@@ -177,7 +177,7 @@ definePageMeta({
 
 <template>
   <div class="sm:pb-12 xl:mx-auto xl:max-w-7xl xl:px-8 px-4 py-12">
-    <BackButton />
+    <BackButton :route="'/'" />
     <ul
       class="flex justify-around p-4 border border-2 rounded-xl mt-6 mb-3 border-[#6ECDDF] grid gap-6 grid-cols-4 flex items-start text-center sm:w-full"
     >

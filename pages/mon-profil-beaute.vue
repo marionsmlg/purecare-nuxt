@@ -110,7 +110,7 @@ definePageMeta({
 
 <template>
   <div class="py-12 max-w-6xl m-auto px-4">
-    <BackButton />
+    <BackButton :route="'/mes-recettes'" />
     <div class="py-10">
       <div class="flex flex-col items-center">
         <h1 class="text-xl font-bold text-center mb-8">

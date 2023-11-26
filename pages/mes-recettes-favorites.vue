@@ -57,7 +57,7 @@ definePageMeta({
 
 <template>
   <div class="xl:px-8 px-4 py-8">
-    <BackButton />
+    <BackButton :route="'/mes-recettes'" />
   </div>
   <Category :recipes="favoriteRecipes" :categoryName="'Mes favoris'" />
   <div

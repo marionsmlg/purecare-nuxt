@@ -167,7 +167,7 @@ definePageMeta({
 
 <template>
   <div class="py-12 max-w-6xl m-auto px-4">
-    <BackButton />
+    <BackToPreviousRouteVue />
     <div v-for="(question, index) in quizData" :key="index" class="py-10">
       <div class="flex flex-col items-center">
         <h1 class="text-xl font-bold text-center mb-8">{{ question.text }}</h1>
