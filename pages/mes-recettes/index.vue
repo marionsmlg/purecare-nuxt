@@ -267,14 +267,16 @@ definePageMeta({
                 <span aria-hidden="true" class="absolute inset-0">
                   <img
                     :src="recipe.img_url"
-                    alt=""
+                    :alt="recipe.title"
                     class="h-full w-full object-cover object-center"
                   />
                 </span>
+
                 <span
                   aria-hidden="true"
                   class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"
                 />
+
                 <div
                   class="absolute right-0 left-0 bottom-4 px-4 mx-auto sm:px-2 lg:px-4 sm:bottom-2 lg:bottom-4"
                 >

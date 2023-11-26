@@ -68,6 +68,9 @@ useSeoMeta({
     "Découvrez une sélection de recettes cosmétiques adaptées à vos besoins.",
   twitterImage: "/purecare-logo.jpg",
 });
+definePageMeta({
+  middleware: "not-auth",
+});
 </script>
 
 <template>
