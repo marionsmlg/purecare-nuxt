@@ -258,49 +258,50 @@ definePageMeta({
             <div
               class="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0"
             >
-              <NuxtLink
+              <div
                 v-for="recipe in highlightHairRecipes"
                 :key="recipe.id"
-                :to="`/recettes/${hairCategorySlug}/${recipe.slug}`"
-                class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto"
+                class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-3 hover:opacity-75 xl:w-auto z-none items-end"
               >
-                <span aria-hidden="true" class="absolute inset-0">
-                  <img
-                    :src="recipe.img_url"
-                    :alt="recipe.title"
-                    class="h-full w-full object-cover object-center"
+                <likeRecipe :recipeId="recipe.id" class="absolute z-10 flex" />
+                <NuxtLink :to="`/recettes/${hairCategorySlug}/${recipe.slug}`">
+                  <span aria-hidden="true" class="absolute inset-0">
+                    <img
+                      :src="recipe.img_url"
+                      :alt="recipe.title"
+                      class="h-full w-full object-cover object-center"
+                    />
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"
                   />
-                </span>
 
-                <span
-                  aria-hidden="true"
-                  class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"
-                />
-
-                <div
-                  class="absolute right-0 left-0 bottom-4 px-4 mx-auto sm:px-2 lg:px-4 sm:bottom-2 lg:bottom-4"
-                >
                   <div
-                    class="p-3 w-full bg-white bg-opacity-80 rounded rounded-lg"
+                    class="absolute right-0 left-0 bottom-4 px-4 mx-auto sm:px-2 lg:px-4 sm:bottom-2 lg:bottom-4"
                   >
-                    <div class="flex flex-row items-center text-gray-800">
-                      <p class="text-sm flex items-center">
-                        <ClockIcon class="w-4 h-4 mr-1" />{{
-                          recipe.preparation_time
-                        }}
-                        |
-                        {{ recipe.ingredient_count }}
-                        ingrédients
+                    <div
+                      class="p-3 w-full bg-white bg-opacity-80 rounded rounded-lg"
+                    >
+                      <div class="flex flex-row items-center text-gray-800">
+                        <p class="text-sm flex items-center">
+                          <ClockIcon class="w-4 h-4 mr-1" />{{
+                            recipe.preparation_time
+                          }}
+                          |
+                          {{ recipe.ingredient_count }}
+                          ingrédients
+                        </p>
+                      </div>
+                      <p
+                        class="mt-4 text-sm text-gray-800 sm:mt-2 lg:mt-3 font-bold"
+                      >
+                        {{ recipe.title }}
                       </p>
                     </div>
-                    <p
-                      class="mt-4 text-sm text-gray-800 sm:mt-2 lg:mt-3 font-bold"
-                    >
-                      {{ recipe.title }}
-                    </p>
                   </div>
-                </div>
-              </NuxtLink>
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
@@ -342,47 +343,50 @@ definePageMeta({
           <div
             class="absolute flex space-x-8 px-4 sm:px-6 lg:px-8 xl:relative xl:grid xl:grid-cols-5 xl:gap-x-8 xl:space-x-0 xl:px-0"
           >
-            <NuxtLink
+            <div
               v-for="recipe in highlightSkinRecipes"
               :key="recipe.id"
-              :to="`/recettes/${skinCategorySlug}/${recipe.slug}`"
-              class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-6 hover:opacity-75 xl:w-auto"
+              class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-3 hover:opacity-75 xl:w-auto z-none items-end"
             >
-              <span aria-hidden="true" class="absolute inset-0">
-                <img
-                  :src="recipe.img_url"
-                  alt=""
-                  class="h-full w-full object-cover object-center"
+              <likeRecipe :recipeId="recipe.id" class="absolute z-10" />
+
+              <NuxtLink :to="`/recettes/${skinCategorySlug}/${recipe.slug}`">
+                <span aria-hidden="true" class="absolute inset-0">
+                  <img
+                    :src="recipe.img_url"
+                    alt=""
+                    class="h-full w-full object-cover object-center"
+                  />
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"
                 />
-              </span>
-              <span
-                aria-hidden="true"
-                class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-50"
-              />
-              <div
-                class="absolute right-0 left-0 bottom-4 px-4 mx-auto sm:px-2 lg:px-4 sm:bottom-2 lg:bottom-4"
-              >
                 <div
-                  class="p-3 w-full bg-white bg-opacity-80 rounded rounded-lg"
+                  class="absolute right-0 left-0 bottom-4 px-4 mx-auto sm:px-2 lg:px-4 sm:bottom-2 lg:bottom-4"
                 >
-                  <div class="flex flex-row items-center text-gray-800">
-                    <p class="text-sm flex items-center">
-                      <ClockIcon class="w-4 h-4 mr-1" />{{
-                        recipe.preparation_time
-                      }}
-                      |
-                      {{ recipe.ingredient_count }}
-                      ingrédients
+                  <div
+                    class="p-3 w-full bg-white bg-opacity-80 rounded rounded-lg"
+                  >
+                    <div class="flex flex-row items-center text-gray-800">
+                      <p class="text-sm flex items-center">
+                        <ClockIcon class="w-4 h-4 mr-1" />{{
+                          recipe.preparation_time
+                        }}
+                        |
+                        {{ recipe.ingredient_count }}
+                        ingrédients
+                      </p>
+                    </div>
+                    <p
+                      class="mt-4 text-sm text-gray-800 sm:mt-2 lg:mt-3 font-bold"
+                    >
+                      {{ recipe.title }}
                     </p>
                   </div>
-                  <p
-                    class="mt-4 text-sm text-gray-800 sm:mt-2 lg:mt-3 font-bold"
-                  >
-                    {{ recipe.title }}
-                  </p>
                 </div>
-              </div>
-            </NuxtLink>
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>

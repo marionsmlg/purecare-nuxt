@@ -68,7 +68,7 @@ definePageMeta({
       <div class="flex items-center">
         <h2 class="text-gray-400 text-center md:text-xl flex-1">
           C'est le moment parfait pour créer votre collection de recettes
-          favorites. Ajoutez-en quelques-unes !
+          favorites. Ajoutez-en quelques-unes en cliquant sur le cœur !
         </h2>
       </div>
       <IconRecipe :color="'#c0c5cc'" class="w-36 h-36 md:w-56 md:h-56" />

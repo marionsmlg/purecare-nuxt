@@ -50,11 +50,15 @@ const toggleLike = async () => {
 </script>
 
 <template>
-  <div>
-    <button @click="toggleLike">
+  <div class="rounded-full overflow-hidden">
+    <button
+      aria-label="Ajouter aux favoris"
+      @click="toggleLike"
+      class="rounded-full bg-white p-1 bg-opacity-50"
+    >
       <component
         :is="liked ? HeartIconFilled : HeartIcon"
-        class="h-7 w-7 text-red-500"
+        :class="[liked ? 'text-red-500' : 'text-gray-700', 'h-6 w-6 pt-0.5']"
       />
     </button>
   </div>
