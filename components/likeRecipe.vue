@@ -54,11 +54,11 @@ const toggleLike = async () => {
     <button
       aria-label="Ajouter aux favoris"
       @click="toggleLike"
-      class="rounded-full bg-white p-1 bg-opacity-50"
+      class="rounded-full bg-white p-1 bg-opacity-70"
     >
       <component
         :is="liked ? HeartIconFilled : HeartIcon"
-        :class="[liked ? 'text-red-500' : 'text-gray-700', 'h-6 w-6 pt-0.5']"
+        :class="[liked ? 'text-red-500' : 'text-gray-700', 'h-7 w-7 pt-0.5']"
       />
     </button>
   </div>
