@@ -82,7 +82,7 @@ definePageMeta({
             class="text-[#605E5E] text-xl font-medium mb-3 md:text-2xl lg:text-4xl"
           >
             Vous cherchez une recette cosmétique adaptée à
-            <span class="text-cyan-500">vous</span> ?
+            <span class="text-cyan-600">vous</span> ?
           </h1>
           <h2 class="text-[#605E5E] md:text-xl lg:text-2xl lg:mb-12">
             PureCare sélectionne des recettes de cosmétiques DIY qui vous
