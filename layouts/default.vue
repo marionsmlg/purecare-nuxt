@@ -136,7 +136,7 @@ const navigation = {
             <MenuButton
               aria-label="Menu utilisateur"
               class="inline-flex w-full justify-center rounded-md text-sm font-medium text-gray-700 hover:text-gray-500"
-            >
+              ><span class="hidden">Menu utilisateur</span>
               <UserIcon class="w-5" />
             </MenuButton>
           </div>
