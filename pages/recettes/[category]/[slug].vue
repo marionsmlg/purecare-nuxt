@@ -88,6 +88,7 @@ async function fetchDataRecipeBySlug(recipeSlug) {
     console.error(error);
   }
 }
+
 onMounted(async () => {
   await fetchDataRecipeBySlug(recipeSlug);
 });

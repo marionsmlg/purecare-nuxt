@@ -29,7 +29,7 @@ async function isRecipeLikedByUser(recipeId) {
   }
 }
 
-const toggleLike = async () => {
+async function toggleLike() {
   liked.value = !liked.value;
 
   try {
@@ -46,7 +46,7 @@ const toggleLike = async () => {
   } catch (error) {
     console.error(error);
   }
-};
+}
 </script>
 
 <template>
@@ -58,7 +58,10 @@ const toggleLike = async () => {
     >
       <component
         :is="liked ? HeartIconFilled : HeartIcon"
-        :class="[liked ? 'text-red-500' : 'text-gray-700', 'h-7 w-7 pt-0.5']"
+        :class="[
+          liked ? 'text-red-500' : 'text-gray-700',
+          'md:h-6 md:w-6 h-7 w-7 pt-0.5',
+        ]"
       />
     </button>
   </div>

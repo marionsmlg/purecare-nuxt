@@ -27,7 +27,8 @@ const props = defineProps({
       role="list"
       class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 px-4 lg:w-3/5"
     >
-      <div v-for="recipe in props.recipes" class="mb-4 w-full hover:opacity-75">
+      <li v-for="recipe in props.recipes" class="mb-4 w-full hover:opacity-75">
+        <!-- <likeRecipe :recipeId="recipe.id" class="absolute z-10" /> -->
         <NuxtLink
           :to="`/recettes/${recipe.recipe_category_slug}/${recipe.slug}`"
         >
@@ -67,7 +68,7 @@ const props = defineProps({
             </div>
           </div>
         </NuxtLink>
-      </div>
+      </li>
     </ul>
   </div>
 </template>

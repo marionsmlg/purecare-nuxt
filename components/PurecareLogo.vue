@@ -1,5 +1,9 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0.00 0.00 473.00 122.00">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.0"
+    viewBox="0.00 0.00 473.00 122.00"
+  >
     <g stroke-width="2.00" fill="none" stroke-linecap="butt">
       <path
         stroke="#cbd9f7"

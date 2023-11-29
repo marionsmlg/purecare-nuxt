@@ -263,7 +263,11 @@ definePageMeta({
                 :key="recipe.id"
                 class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-3 hover:opacity-75 xl:w-auto z-none items-end"
               >
-                <likeRecipe :recipeId="recipe.id" class="absolute z-10 flex" />
+                <likeRecipe
+                  v-if="isUserLoggedIn"
+                  :recipeId="recipe.id"
+                  class="absolute z-10 flex"
+                />
                 <NuxtLink :to="`/recettes/${hairCategorySlug}/${recipe.slug}`">
                   <span aria-hidden="true" class="absolute inset-0">
                     <img
@@ -348,7 +352,11 @@ definePageMeta({
               :key="recipe.id"
               class="relative flex h-80 w-56 flex-col overflow-hidden rounded-lg p-3 hover:opacity-75 xl:w-auto z-none items-end"
             >
-              <likeRecipe :recipeId="recipe.id" class="absolute z-10" />
+              <likeRecipe
+                v-if="isUserLoggedIn"
+                :recipeId="recipe.id"
+                class="absolute z-10"
+              />
 
               <NuxtLink :to="`/recettes/${skinCategorySlug}/${recipe.slug}`">
                 <span aria-hidden="true" class="absolute inset-0">
